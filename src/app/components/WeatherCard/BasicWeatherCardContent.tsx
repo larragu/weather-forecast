@@ -1,4 +1,4 @@
-import { CardContent, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { BasicWeather } from "../../utils/weather.types";
 
 interface BasicWeatherCardContentProps extends BasicWeather {}
@@ -12,7 +12,7 @@ const BasicWeatherCardContent = (props: BasicWeatherCardContentProps) => {
     climateIcon,
   } = props;
   return (
-    <CardContent>
+    <>
       <Typography gutterBottom variant="h5" component="div">
         {name}
       </Typography>
@@ -36,7 +36,7 @@ const BasicWeatherCardContent = (props: BasicWeatherCardContentProps) => {
           height="50"
         />
       </Typography>
-    </CardContent>
+    </>
   );
 };
 

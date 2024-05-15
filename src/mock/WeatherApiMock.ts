@@ -13,11 +13,11 @@ class WeatherApiMock {
 
     const results = await new Promise<CityResult[]>((resolve) => {
       getCitiesDebounceTimer = setTimeout(() => {
-        const test = cityResults.filter((city) =>
+        const cityList = cityResults.filter((city) =>
           city.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
-        resolve(test);
+        resolve(cityList);
       }, LATENCY_MS);
     });
     return results;

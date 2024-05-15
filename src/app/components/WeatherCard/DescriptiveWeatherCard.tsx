@@ -1,17 +1,23 @@
-"use client";
-
-import { Card } from "@mui/material";
+import { Box, Card, CardContent } from "@mui/material";
 import BasicWeatherCardContent from "./BasicWeatherCardContent";
-import { BasicWeather } from "../../utils/weather.types";
+import { DescriptiveWeather } from "../../utils/weather.types";
+import FavoriteCity from "../FavoriteCity";
 
-interface DescriptiveWeatherCard extends BasicWeather {}
-const DescriptiveWeatherCard = (props: DescriptiveWeatherCard) => {
-  return props ? (
+interface DescriptiveWeatherCardProps extends DescriptiveWeather {}
+const DescriptiveWeatherCard = (props: DescriptiveWeatherCardProps) => {
+  const { id, ...restProps } = props;
+
+  return (
     <Card>
-      <BasicWeatherCardContent {...props} />
-      Descriptive details go here
+      <CardContent>
+        <Box display="flex" justifyContent="flex-end">
+          <FavoriteCity id={id} />
+        </Box>
+        <BasicWeatherCardContent {...restProps} />
+        Descriptive details go here
+      </CardContent>
     </Card>
-  ) : null;
+  );
 };
 
 export default DescriptiveWeatherCard;

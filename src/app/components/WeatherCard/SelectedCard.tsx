@@ -1,7 +1,7 @@
 "use client";
 
 import { useWeatherContext } from "../../../store/useWeatherContext";
-import { Card, CardActionArea } from "@mui/material";
+import { Card, CardActionArea, CardContent } from "@mui/material";
 import MuiLink from "next/link";
 import BasicWeatherCardContent from "./BasicWeatherCardContent";
 
@@ -12,7 +12,9 @@ const SelectedCard = () => {
     <MuiLink href={`/details/${selectedCity.id}`}>
       <CardActionArea>
         <Card>
-          <BasicWeatherCardContent {...selectedCity} />
+          <CardContent>
+            <BasicWeatherCardContent {...selectedCity} />
+          </CardContent>
         </Card>
       </CardActionArea>
     </MuiLink>

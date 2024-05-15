@@ -6,6 +6,8 @@ import { SelectedCity } from "@/app/utils/weather.types";
 interface WeatherContextProps {
   setSelectedCity: (selectedCity: SelectedCity) => void;
   selectedCity: SelectedCity | null;
+  toggleFavorite: (cityId: string) => void;
+  favorites: string[];
 }
 
 const WeatherContext = createContext<WeatherContextProps | null>(null);
@@ -30,11 +32,17 @@ export const WeatherProvider = ({ children }: WeatherProviderProps) => {
     dispatch({ type: ACTIONS.SET_SELECTED_CITY, payload: selectedCity });
   };
 
+  const toggleFavorite = (cityId: string) => {
+    dispatch({ type: ACTIONS.TOGGLE_FAVORITE, payload: cityId });
+  };
+
   return (
     <WeatherContext.Provider
       value={{
         setSelectedCity,
         selectedCity: state.selectedCity,
+        toggleFavorite,
+        favorites: state.favorites,
       }}
     >
       {children}
