@@ -22,18 +22,14 @@ const DetailedWeatherCard = (props: DetailedWeatherCardProps) => {
   return (
     <Card>
       <CardContent>
-        {showFavoriteButton ? (
-          <Box display="flex" justifyContent="flex-end">
-            <FavoriteCity id={id} />
-          </Box>
-        ) : null}
-
-        <Typography gutterBottom variant="h5" component="div">
-          {name}
-        </Typography>
-        <Typography variant="h6" color="text.secondary">
-          Feels like {feelsLike}
-        </Typography>
+        <Box display="flex" justifyContent="space-between">
+          <Typography variant="h5">Feels like {feelsLike}</Typography>
+          {showFavoriteButton ? (
+            <Box display="flex" justifyContent="flex-end">
+              <FavoriteCity id={id} />
+            </Box>
+          ) : null}
+        </Box>
         <BasicWeatherCardContent {...restProps} />
         <Typography variant="body2" color="text.secondary">
           Pressure: {pressure}

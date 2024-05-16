@@ -15,7 +15,7 @@ const Details = async ({ params }: { params: { id: string } }) => {
   console.log("11 : ", restCurrent);
   return (
     <>
-      <Typography gutterBottom variant="h5" component="div">
+      <Typography gutterBottom variant="h5">
         Weather Today in {restCurrent.name}
       </Typography>
       <Stack spacing={6} paddingX={{ sm: 2 }} paddingY={{ xs: 2 }}>
