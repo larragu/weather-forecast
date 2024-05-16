@@ -1,4 +1,4 @@
-#Weather Forecast
+# Weather Forecast
 
 ##### Developed by: Alex Larragueta
 
@@ -8,7 +8,7 @@
 
 ## Tech Spec
 
-##### https://alexlarragueta.slite.com/api/s/xgKQLnKTrhWh2i/Weather-Forecast-Tech-Spec
+##### https://alexlarragueta.slite.page/p/xgKQLnKTrhWh2i/Weather-Forecast-Tech-Spec
 
 ## Features
 
