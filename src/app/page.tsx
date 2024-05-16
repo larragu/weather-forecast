@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import SelectedWeatherCard from "./components/WeatherCard/SelectedWeatherCard";
+import { SelectedWeatherCard } from "./components/WeatherCard";
 
 export default function Home() {
   return (

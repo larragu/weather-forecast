@@ -1,5 +1,5 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
-import WeatherCardContent from "./WeatherCardContent";
+import { WeatherCardContent } from "./";
 import { DetailedWeather } from "@/types";
 import FavoriteCityButton from "../FavoriteCityButton";
 

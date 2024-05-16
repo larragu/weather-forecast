@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material";
-import DayForecast from "./WeatherCard/DayForecast";
+import DayForecast from "./DayForecast";
 import { ForecastWeather } from "@/types";
 
 const DailyForecast = ({ days }: { days: ForecastWeather[] }): JSX.Element => {

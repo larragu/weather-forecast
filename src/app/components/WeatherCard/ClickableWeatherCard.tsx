@@ -1,6 +1,6 @@
 "use client";
 import { Typography } from "@mui/material";
-import { LinkCard } from ".";
+import LinkCard from "../LinkCard";
 import WeatherCardContent from "./WeatherCardContent";
 import { BasicWeather } from "@/types";
 

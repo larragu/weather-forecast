@@ -1,6 +1,6 @@
 import { BasicWeather } from "@/types";
 import { Card, CardContent, Typography } from "@mui/material";
-import WeatherCardContent from "./WeatherCardContent";
+import { WeatherCardContent } from "./WeatherCard";
 import { formatForecastDate } from "@/utils";
 
 interface DayForecastProps extends Omit<BasicWeather, "id"> {

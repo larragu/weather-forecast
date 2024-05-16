@@ -1,12 +1,12 @@
 "use client";
 
 import useLocalStorage from "@/hooks/useLocalStorage";
-import { LinkCard } from "../components/WeatherCard";
+import LinkCard from "./LinkCard";
 import { getFavorites } from "@/service/weatherClient";
 import { useEffect, useState } from "react";
 import { BasicWeather } from "@/types";
 import { Typography, Box, Grid } from "@mui/material";
-import WeatherCardContent from "./WeatherCard/WeatherCardContent";
+import { WeatherCardContent } from "./WeatherCard";
 
 const FavoriteCities = (): JSX.Element | null => {
   const { localStorageFavorites } = useLocalStorage();
