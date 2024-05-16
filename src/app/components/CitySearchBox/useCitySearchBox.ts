@@ -1,6 +1,6 @@
 import { getCities, getWeather } from "../../../service/weatherClient";
 import useSearchBox from "../SearchBox/useSearchBox";
-import { SelectedCity } from "@/types";
+import { BasicWeather } from "@/types";
 import { SearchBoxOption } from "@/types";
 
 interface UseCitySearchBoxReturnProps {
@@ -11,7 +11,7 @@ interface UseCitySearchBoxReturnProps {
 }
 
 interface UseCitySearchBoxProps {
-  onSelectCity: (selectedCity: SelectedCity) => void;
+  onSelectCity: (selectedCity: BasicWeather) => void;
 }
 
 const getSearchResults = async (searchTerm: string) => {

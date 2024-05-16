@@ -1,5 +1,5 @@
 import HttpClient from "./HttpClient";
-import { CityResult, SelectedCity, SelectedCityDTO } from "@/types";
+import { CityResult, BasicWeather, SelectedCityDTO } from "@/types";
 
 const options = {
   method: "GET",
@@ -29,7 +29,7 @@ class WeatherApi {
     return [];
   };
 
-  static getWeather = async (cityId: string): Promise<Error | SelectedCity> => {
+  static getWeather = async (cityId: string): Promise<Error | BasicWeather> => {
     const url = `${baseUrl}/current.json?q=${cityId}`;
     const result = await HttpClient.get<SelectedCityDTO>(url, options);
 
@@ -51,7 +51,7 @@ class WeatherApi {
   static getDescriptiveWeather = async (
     cityId: string,
     days: number = 3
-  ): Promise<Error | SelectedCity> => {
+  ): Promise<Error | BasicWeather> => {
     const url = `${baseUrl}/forecast.json?q=${cityId}&days=${days}`;
 
     const results = await HttpClient.get<any>(url, options);

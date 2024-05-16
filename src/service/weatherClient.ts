@@ -1,5 +1,5 @@
 import HttpClient from "./HttpClient";
-import { CityResult, DescriptiveWeather, SelectedCity } from "@/types";
+import { CityResult, DescriptiveWeather, BasicWeather } from "@/types";
 
 const BASE_PATH = process.env.BASE_PATH;
 
@@ -10,9 +10,9 @@ const getCities = async (searchTerm: string): Promise<CityResult[]> => {
   return results;
 };
 
-const getWeather = async (cityName: string): Promise<SelectedCity> => {
+const getWeather = async (cityName: string): Promise<BasicWeather> => {
   const url = `/api/cities?id=${cityName}`;
-  const results = await HttpClient.get<SelectedCity>(url);
+  const results = await HttpClient.get<BasicWeather>(url);
 
   return results;
 };
@@ -28,9 +28,9 @@ const getDescriptiveWeather = async (
   return result;
 };
 
-const getFavorites = async (ids: string[]): Promise<SelectedCity[]> => {
+const getFavorites = async (ids: string[]): Promise<BasicWeather[]> => {
   const url = `/api/favorites?ids=${ids}`;
-  const results = await HttpClient.get<SelectedCity[]>(url);
+  const results = await HttpClient.get<BasicWeather[]>(url);
 
   return results;
 };

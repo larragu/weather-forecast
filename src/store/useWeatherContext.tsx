@@ -2,12 +2,12 @@
 
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { ACTIONS, initialState, weatherReducer } from "@/store/weatherReducer";
-import { SelectedCity } from "@/app/utils/weather.types";
+import { BasicWeather } from "@/types";
 import useLocalStorage from "@/hooks/useLocalStorage";
 
 interface WeatherContextProps {
-  setSelectedCity: (selectedCity: SelectedCity) => void;
-  selectedCity: SelectedCity | null;
+  setSelectedCity: (selectedCity: BasicWeather) => void;
+  selectedCity: BasicWeather | null;
   toggleFavorite: (cityId: string) => void;
   favorites: string[] | null;
 }
@@ -46,7 +46,7 @@ export const WeatherProvider = ({ children }: WeatherProviderProps) => {
     setFavorites(localStorageFavorites);
   }, [JSON.stringify(localStorageFavorites)]);
 
-  const setSelectedCity = (selectedCity: SelectedCity): void => {
+  const setSelectedCity = (selectedCity: BasicWeather): void => {
     dispatch({ type: ACTIONS.SET_SELECTED_CITY, payload: selectedCity });
   };
 

@@ -1,7 +1,7 @@
 import { BasicWeather } from "@/types";
 import { DescriptiveWeatherCard } from ".";
 
-interface DayForecastProps extends BasicWeather {
+interface DayForecastProps extends Omit<BasicWeather, "id"> {
   date: string;
 }
 const DayForecast = (props: DayForecastProps) => {

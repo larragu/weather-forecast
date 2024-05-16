@@ -31,7 +31,7 @@ interface SelectedCityDTO {
   };
 }
 
-interface SelectedCity {
+interface BasicWeather {
   id: string;
   name: string;
   temperature: string;
@@ -41,10 +41,8 @@ interface SelectedCity {
   climateIcon: string;
 }
 
-interface BasicWeather extends Omit<SelectedCity, "id"> {}
-
-interface DescriptiveWeather extends SelectedCity {
-  forecast?: SelectedCity[];
+interface DescriptiveWeather extends BasicWeather {
+  forecast?: BasicWeather[];
 }
 
 const exampeCityResult = {
@@ -58,7 +56,6 @@ const exampeCityResult = {
 };
 
 export type {
-  SelectedCity,
   CityResult,
   BasicWeather,
   DescriptiveWeather,

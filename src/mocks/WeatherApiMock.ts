@@ -1,4 +1,4 @@
-import { CityResult, DescriptiveWeather, SelectedCity } from "@/types";
+import { CityResult, DescriptiveWeather, BasicWeather } from "@/types";
 import {
   cityResults,
   exampleDetailedCity,
@@ -28,7 +28,7 @@ class WeatherApiMock {
   };
 
   static getWeather = async (cityId: string) => {
-    const results = await new Promise<SelectedCity>((resolve) => {
+    const results = await new Promise<BasicWeather>((resolve) => {
       setTimeout(() => {
         const selectedCity = {
           id: cityId,
@@ -84,7 +84,7 @@ class WeatherApiMock {
   };
 
   static getFavorites = async (cityId: string) => {
-    const results = await new Promise<SelectedCity[]>((resolve) => {
+    const results = await new Promise<BasicWeather[]>((resolve) => {
       setTimeout(() => {
         const selectedCities = [
           {

@@ -1,9 +1,9 @@
 "use client";
 import { LinkCard } from ".";
 import BasicWeatherCardContent from "./BasicWeatherCardContent";
-import { SelectedCity } from "@/types";
+import { BasicWeather } from "@/types";
 
-interface ClickableWeatherCardProps extends SelectedCity {
+interface ClickableWeatherCardProps extends Omit<BasicWeather, "id"> {
   url: string;
 }
 const ClickableWeatherCard = (

@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { BasicWeather } from "@/types";
 
-interface BasicWeatherCardContentProps extends BasicWeather {}
+interface BasicWeatherCardContentProps extends Omit<BasicWeather, "id"> {}
 const BasicWeatherCardContent = (props: BasicWeatherCardContentProps) => {
   const {
     name,

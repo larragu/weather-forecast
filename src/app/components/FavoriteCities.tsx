@@ -4,13 +4,13 @@ import useLocalStorage from "@/hooks/useLocalStorage";
 import { LinkCard } from "../components/WeatherCard";
 import { getFavorites } from "@/service/weatherClient";
 import { useEffect, useState } from "react";
-import { SelectedCity } from "@/types";
+import { BasicWeather } from "@/types";
 import { Stack } from "@mui/material";
 import BasicWeatherCardContent from "./WeatherCard/BasicWeatherCardContent";
 
 const FavoriteCities = (): JSX.Element | null => {
   const { localStorageFavorites } = useLocalStorage();
-  const [favorites, setFavorites] = useState<SelectedCity[]>([]);
+  const [favorites, setFavorites] = useState<BasicWeather[]>([]);
 
   useEffect(() => {
     if (localStorageFavorites && localStorageFavorites.length > 0) {

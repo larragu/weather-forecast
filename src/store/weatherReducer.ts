@@ -1,7 +1,7 @@
-import { SelectedCity } from "@/app/utils/weather.types";
+import { BasicWeather } from "@/types";
 
 type State = {
-  selectedCity: SelectedCity | null;
+  selectedCity: BasicWeather | null;
   favorites: string[] | null;
 };
 
@@ -12,7 +12,7 @@ export enum ACTIONS {
 }
 export type ReducerWithAction = {
   type: ACTIONS;
-  payload?: SelectedCity | string | string[] | null;
+  payload?: BasicWeather | string | string[] | null;
 };
 
 export const initialState: State = {
@@ -28,7 +28,7 @@ export const weatherReducer = (
     case ACTIONS.SET_SELECTED_CITY: {
       return {
         ...state,
-        selectedCity: action.payload as SelectedCity,
+        selectedCity: action.payload as BasicWeather,
       };
     }
     case ACTIONS.TOGGLE_FAVORITE: {
