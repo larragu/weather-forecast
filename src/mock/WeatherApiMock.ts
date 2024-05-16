@@ -1,5 +1,13 @@
-import { CityResult, SelectedCity } from "@/app/utils/weather.types";
-import { cityResults, exampleSelectedCity } from "./weatherResponse";
+import {
+  CityResult,
+  DescriptiveWeather,
+  SelectedCity,
+} from "@/app/utils/weather.types";
+import {
+  cityResults,
+  exampleDetailedCity,
+  exampleSelectedCity,
+} from "./weatherResponse";
 
 const LATENCY_MS = 300;
 
@@ -44,19 +52,33 @@ class WeatherApiMock {
   };
 
   static getDescriptiveWeather = async (cityId: string, _days: number) => {
-    const results = await new Promise<SelectedCity>((resolve) => {
+    console.log("exampleDetailedCity.forecast: ", exampleDetailedCity.forecast);
+    const results = await new Promise<DescriptiveWeather>((resolve) => {
+      const forecast = exampleDetailedCity.forecast;
       setTimeout(() => {
-        const selectedCity = {
+        const detailedCity = {
           id: cityId,
-          name: exampleSelectedCity.location.name,
-          temperature: exampleSelectedCity.current.temp_c.toString(),
-          weatherDescription: exampleSelectedCity.current.condition.text,
-          humidity: exampleSelectedCity.current.humidity.toString(),
-          windVelocity: exampleSelectedCity.current.wind_kph.toString(),
-          climateIcon: exampleSelectedCity.current.condition.icon,
-        };
+          name: exampleDetailedCity.location.name,
+          temperature: exampleDetailedCity.current.temp_c.toString(),
+          weatherDescription: exampleDetailedCity.current.condition.text,
+          humidity: exampleDetailedCity.current.humidity.toString(),
+          windVelocity: exampleDetailedCity.current.wind_kph.toString(),
+          climateIcon: exampleDetailedCity.current.condition.icon,
 
-        resolve(selectedCity);
+          forecast: forecast.forecastday.map((forecastday) => {
+            const { date, day } = forecastday;
+            const { avgtemp_c, avghumidity, maxwind_mph, condition } = day;
+
+            return {
+              date: date,
+              temperature: avgtemp_c,
+              humidity: avghumidity,
+              windVelocity: maxwind_mph,
+              climateIcon: condition.icon,
+            };
+          }),
+        };
+        resolve(detailedCity);
       }, LATENCY_MS);
     });
 

@@ -12,10 +12,6 @@ const useLocalStorage = () => {
     setFavorites(favorites);
   }, []);
 
-  const setFavoritesHandler = (favorites: string[]) => {
-    setFavorites(favorites);
-  };
-
   useEffect(() => {
     if (favorites) {
       if (favorites?.length > 0) {
@@ -25,6 +21,10 @@ const useLocalStorage = () => {
       }
     }
   }, [JSON.stringify(favorites)]);
+
+  const setFavoritesHandler = (favorites: string[]) => {
+    setFavorites(favorites);
+  };
 
   return {
     setLocalStorageFavorites: setFavoritesHandler,

@@ -3,16 +3,20 @@ import BasicWeatherCardContent from "./BasicWeatherCardContent";
 import { DescriptiveWeather } from "../../utils/weather.types";
 import FavoriteCity from "../FavoriteCity";
 
-interface DescriptiveWeatherCardProps extends DescriptiveWeather {}
+interface DescriptiveWeatherCardProps extends DescriptiveWeather {
+  showFavoriteButton: boolean;
+}
 const DescriptiveWeatherCard = (props: DescriptiveWeatherCardProps) => {
-  const { id, ...restProps } = props;
+  const { id, showFavoriteButton = false, ...restProps } = props;
 
   return (
     <Card>
       <CardContent>
-        <Box display="flex" justifyContent="flex-end">
-          <FavoriteCity id={id} />
-        </Box>
+        {showFavoriteButton ? (
+          <Box display="flex" justifyContent="flex-end">
+            <FavoriteCity id={id} />
+          </Box>
+        ) : null}
         <BasicWeatherCardContent {...restProps} />
         Descriptive details go here
       </CardContent>

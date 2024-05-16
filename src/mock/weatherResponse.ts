@@ -64,49 +64,49 @@ const exampleSelectedCity = {
   },
 };
 
-const exampleDetailedCity = {
-  location: {
-    name: "Chicago",
-    region: "Illinois",
-    country: "United States of America",
-    lat: 41.85,
-    lon: -87.65,
-    tz_id: "America/Chicago",
-    localtime_epoch: 1715776898,
-    localtime: "2024-05-15 7:41",
-  },
-  current: {
-    last_updated_epoch: 1715776200,
-    last_updated: "2024-05-15 07:30",
-    temp_c: 12.2,
-    temp_f: 54,
-    is_day: 1,
-    condition: {
-      text: "Partly cloudy",
-      icon: "//cdn.weatherapi.com/weather/64x64/day/116.png",
-      code: 1003,
-    },
-    wind_mph: 12.5,
-    wind_kph: 20.2,
-    wind_degree: 30,
-    wind_dir: "NNE",
-    pressure_mb: 1010,
-    pressure_in: 29.83,
-    precip_mm: 0,
-    precip_in: 0,
-    humidity: 72,
-    cloud: 50,
-    feelslike_c: 10.3,
-    feelslike_f: 50.6,
-    vis_km: 16,
-    vis_miles: 9,
-    uv: 4,
-    gust_mph: 16.9,
-    gust_kph: 27.1,
-  },
-};
+// const exampleDetailedCity = {
+//   location: {
+//     name: "Chicago",
+//     region: "Illinois",
+//     country: "United States of America",
+//     lat: 41.85,
+//     lon: -87.65,
+//     tz_id: "America/Chicago",
+//     localtime_epoch: 1715776898,
+//     localtime: "2024-05-15 7:41",
+//   },
+//   current: {
+//     last_updated_epoch: 1715776200,
+//     last_updated: "2024-05-15 07:30",
+//     temp_c: 12.2,
+//     temp_f: 54,
+//     is_day: 1,
+//     condition: {
+//       text: "Partly cloudy",
+//       icon: "//cdn.weatherapi.com/weather/64x64/day/116.png",
+//       code: 1003,
+//     },
+//     wind_mph: 12.5,
+//     wind_kph: 20.2,
+//     wind_degree: 30,
+//     wind_dir: "NNE",
+//     pressure_mb: 1010,
+//     pressure_in: 29.83,
+//     precip_mm: 0,
+//     precip_in: 0,
+//     humidity: 72,
+//     cloud: 50,
+//     feelslike_c: 10.3,
+//     feelslike_f: 50.6,
+//     vis_km: 16,
+//     vis_miles: 9,
+//     uv: 4,
+//     gust_mph: 16.9,
+//     gust_kph: 27.1,
+//   },
+// };
 
-const exampleForecastWeather = {
+const exampleDetailedCity = {
   location: {
     name: "Chicago",
     region: "Illinois",
@@ -3157,4 +3157,112 @@ const exampleForecastWeather = {
     ],
   },
 };
-export { cityResults, exampleSelectedCity };
+export { cityResults, exampleSelectedCity, exampleDetailedCity };
+
+//   [
+//     {
+//       "id": 9009759,
+//       "name": "Chicago Fss",
+//       "region": "Chicago",
+//       "country": "United States of America",
+//       "lat": 41.88,
+//       "lon": -87.77,
+//       "url": "chicago-fss-chicago-united-states-of-america"
+//     }
+//   ]
+
+//   [
+//     {
+//       "id": 2566581,
+//       "name": "Chicago",
+//       "region": "Illinois",
+//       "country": "United States of America",
+//       "lat": 41.85,
+//       "lon": -87.65,
+//       "url": "chicago-illinois-united-states-of-america"
+//     },
+//     {
+//       "id": 1884726,
+//       "name": "Chichawatni",
+//       "region": "Punjab",
+//       "country": "Pakistan",
+//       "lat": 30.53,
+//       "lon": 72.7,
+//       "url": "chichawatni-punjab-pakistan"
+//     },
+//     {
+//       "id": 906484,
+//       "name": "Chichicastenango",
+//       "region": "Quiche",
+//       "country": "Guatemala",
+//       "lat": 14.93,
+//       "lon": -91.12,
+//       "url": "chichicastenango-quiche-guatemala"
+//     },
+//     {
+//       "id": 2785690,
+//       "name": "Chichester",
+//       "region": "West Sussex",
+//       "country": "United Kingdom",
+//       "lat": 50.83,
+//       "lon": -0.77,
+//       "url": "chichester-west-sussex-united-kingdom"
+//     },
+//     {
+//       "id": 906466,
+//       "name": "Chicacao",
+//       "region": "Suchitepequez",
+//       "country": "Guatemala",
+//       "lat": 14.53,
+//       "lon": -91.32,
+//       "url": "chicacao-suchitepequez-guatemala"
+//     }
+//   ]
+
+//   [
+//     {
+//       "id": 2566581,
+//       "name": "Chicago",
+//       "region": "Illinois",
+//       "country": "United States of America",
+//       "lat": 41.85,
+//       "lon": -87.65,
+//       "url": "chicago-illinois-united-states-of-america"
+//     },
+//     {
+//       "id": 2566582,
+//       "name": "Chicago Heights",
+//       "region": "Illinois",
+//       "country": "United States of America",
+//       "lat": 41.51,
+//       "lon": -87.64,
+//       "url": "chicago-heights-illinois-united-states-of-america"
+//     },
+//     {
+//       "id": 906466,
+//       "name": "Chicacao",
+//       "region": "Suchitepequez",
+//       "country": "Guatemala",
+//       "lat": 14.53,
+//       "lon": -91.32,
+//       "url": "chicacao-suchitepequez-guatemala"
+//     },
+//     {
+//       "id": 1791725,
+//       "name": "Chicama",
+//       "region": "La Libertad",
+//       "country": "Peru",
+//       "lat": -7.7,
+//       "lon": -79.44,
+//       "url": "chicama-la-libertad-peru"
+//     },
+//     {
+//       "id": 3225651,
+//       "name": "Chicahuaxtla",
+//       "region": "Puebla",
+//       "country": "Mexico",
+//       "lat": 20.14,
+//       "lon": -97.95,
+//       "url": "chicahuaxtla-puebla-mexico"
+//     }
+//   ]

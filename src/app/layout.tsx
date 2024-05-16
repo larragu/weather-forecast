@@ -7,6 +7,7 @@ import theme from "../theme";
 import "./globals.css";
 import styles from "./page.module.css";
 import { WeatherProvider } from "@/store/useWeatherContext";
+import { Box } from "@mui/material";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +29,13 @@ export default function RootLayout({
             <WeatherProvider>
               <>
                 <HeaderNavigationBar />
-                <main className={styles.main}>{children}</main>
+                <Box
+                  component="main"
+                  padding={{ xs: 2, sm: 4 }}
+                  className={styles.main}
+                >
+                  {children}
+                </Box>
               </>
             </WeatherProvider>
           </ThemeProvider>
