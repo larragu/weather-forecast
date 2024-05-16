@@ -1,17 +1,18 @@
 import { CardActionArea, Card, CardContent } from "@mui/material";
 import MuiLink from "next/link";
-import BasicWeatherCardContent from "../WeatherCard/BasicWeatherCardContent";
-import { SelectedCity } from "@/types";
 
-interface LinkCardProps extends SelectedCity {}
+interface LinkCardProps {
+  url: string;
+  children: React.ReactNode;
+}
+
 const LinkCard = (city: LinkCardProps): JSX.Element => {
+  const { children, url } = city;
   return (
-    <MuiLink href={`/details/${city.id}`}>
+    <MuiLink href={url}>
       <CardActionArea>
         <Card>
-          <CardContent>
-            <BasicWeatherCardContent {...city} />
-          </CardContent>
+          <CardContent>{children}</CardContent>
         </Card>
       </CardActionArea>
     </MuiLink>

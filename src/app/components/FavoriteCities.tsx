@@ -6,6 +6,7 @@ import { getFavorites } from "@/service/weatherClient";
 import { useEffect, useState } from "react";
 import { SelectedCity } from "@/types";
 import { Stack } from "@mui/material";
+import BasicWeatherCardContent from "./WeatherCard/BasicWeatherCardContent";
 
 const FavoriteCities = (): JSX.Element | null => {
   const { localStorageFavorites } = useLocalStorage();
@@ -27,9 +28,15 @@ const FavoriteCities = (): JSX.Element | null => {
   }
   return (
     <Stack spacing={4}>
-      {favorites?.map((favorite) => (
-        <LinkCard key={favorite.id} {...favorite} />
-      ))}
+      {favorites?.map((favorite) => {
+        const { id, ...restFavorite } = favorite;
+
+        return (
+          <LinkCard key={id} url={`/details/${id}`}>
+            <BasicWeatherCardContent {...restFavorite} />
+          </LinkCard>
+        );
+      })}
     </Stack>
   );
 };
