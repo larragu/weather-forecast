@@ -1,8 +1,8 @@
 "use client";
 
-import useCitySearchBox from "../../hooks/useCitySearchBox";
+import useCitySearchBox from "./useCitySearchBox";
 import { useWeatherContext } from "@/store/useWeatherContext";
-import SearchBox from "./SearchBox";
+import SearchBox from "../SearchBox/SearchBox";
 
 const CitySearchBox = () => {
   const { setSelectedCity } = useWeatherContext();

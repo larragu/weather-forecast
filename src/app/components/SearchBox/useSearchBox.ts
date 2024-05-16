@@ -1,6 +1,6 @@
 import { debounce } from "@mui/material";
 import { useState, useEffect, useCallback } from "react";
-import { SearchBoxOption } from "../types";
+import { SearchBoxOption } from "@/types";
 
 interface UseSearchBoxReturnProps {
   searchValue: string | null;

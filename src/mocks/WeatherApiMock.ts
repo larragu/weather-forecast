@@ -1,8 +1,4 @@
-import {
-  CityResult,
-  DescriptiveWeather,
-  SelectedCity,
-} from "@/app/utils/weather.types";
+import { CityResult, DescriptiveWeather, SelectedCity } from "@/types";
 import {
   cityResults,
   exampleDetailedCity,

@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 import { Box, List, ListItem, Link as MuiLink } from "@mui/material";
-import CitySearchBox from "./CitySearchBox";
+import CitySearchBox from "./CitySearchBox/CitySearchBox";
 
 const menuItems = [
   { path: "/", label: "Home" },

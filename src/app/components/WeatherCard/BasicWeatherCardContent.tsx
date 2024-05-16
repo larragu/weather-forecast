@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { BasicWeather } from "../../utils/weather.types";
+import { BasicWeather } from "@/types";
 
 interface BasicWeatherCardContentProps extends BasicWeather {}
 const BasicWeatherCardContent = (props: BasicWeatherCardContentProps) => {

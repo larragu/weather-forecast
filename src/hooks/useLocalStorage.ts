@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { FAVORITES_KEY } from "@/app/constants";
+import { useEffect, useMemo, useState } from "react";
+import { FAVORITES_KEY } from "@/constants";
 
 const useLocalStorage = () => {
   const [favorites, setFavorites] = useState<string[] | null>(null);

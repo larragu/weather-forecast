@@ -4,7 +4,7 @@ import useLocalStorage from "@/hooks/useLocalStorage";
 import { LinkCard } from "../components/WeatherCard";
 import { getFavorites } from "@/service/weatherClient";
 import { useEffect, useState } from "react";
-import { SelectedCity } from "../utils/weather.types";
+import { SelectedCity } from "@/types";
 import { Stack } from "@mui/material";
 
 const FavoriteCities = (): JSX.Element | null => {

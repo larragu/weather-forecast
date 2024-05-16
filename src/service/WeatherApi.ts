@@ -1,9 +1,5 @@
-import HttpClient from "../app/utils/HttpClient";
-import {
-  CityResult,
-  SelectedCity,
-  SelectedCityDTO,
-} from "../app/utils/weather.types";
+import HttpClient from "./HttpClient";
+import { CityResult, SelectedCity, SelectedCityDTO } from "@/types";
 
 const options = {
   method: "GET",

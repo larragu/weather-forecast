@@ -1,7 +1,7 @@
 "use client";
 
 import { useWeatherContext } from "../../../store/useWeatherContext";
-import { LinkCard } from ".";
+import { LinkCard } from "../WeatherCard";
 
 const SelectedCard = () => {
   const { selectedCity } = useWeatherContext();

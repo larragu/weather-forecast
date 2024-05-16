@@ -1,6 +1,6 @@
-import { getCities, getWeather } from "../service/weatherClient";
-import useSearchBox from "./useSearchBox";
-import { SelectedCity } from "@/app/utils/weather.types";
+import { getCities, getWeather } from "../../../service/weatherClient";
+import useSearchBox from "../SearchBox/useSearchBox";
+import { SelectedCity } from "@/types";
 import { SearchBoxOption } from "@/types";
 
 interface UseCitySearchBoxReturnProps {

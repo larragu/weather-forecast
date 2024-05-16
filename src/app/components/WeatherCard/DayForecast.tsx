@@ -1,4 +1,4 @@
-import { BasicWeather } from "@/app/utils/weather.types";
+import { BasicWeather } from "@/types";
 import { DescriptiveWeatherCard } from ".";
 
 interface DayForecastProps extends BasicWeather {

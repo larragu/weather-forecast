@@ -1,9 +1,5 @@
-import HttpClient from "../app/utils/HttpClient";
-import {
-  CityResult,
-  DescriptiveWeather,
-  SelectedCity,
-} from "../app/utils/weather.types";
+import HttpClient from "./HttpClient";
+import { CityResult, DescriptiveWeather, SelectedCity } from "@/types";
 
 const BASE_PATH = process.env.BASE_PATH;
 

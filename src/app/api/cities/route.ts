@@ -1,4 +1,4 @@
-import WeatherApiMock from "@/mock/WeatherApiMock";
+import WeatherApiMock from "@/mocks/WeatherApiMock";
 import WeatherApi from "@/service/WeatherApi";
 
 export async function GET(request: Request) {

@@ -1,6 +1,6 @@
 import { Box, Card, CardContent } from "@mui/material";
 import BasicWeatherCardContent from "./BasicWeatherCardContent";
-import { DescriptiveWeather } from "../../utils/weather.types";
+import { DescriptiveWeather } from "@/types";
 import FavoriteCity from "../FavoriteCity";
 
 type FavoriteProps = { id: string; showFavoriteButton: boolean };

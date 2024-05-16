@@ -1,7 +1,7 @@
 import { CardActionArea, Card, CardContent } from "@mui/material";
 import MuiLink from "next/link";
-import BasicWeatherCardContent from "./BasicWeatherCardContent";
-import { SelectedCity } from "@/app/utils/weather.types";
+import BasicWeatherCardContent from "../WeatherCard/BasicWeatherCardContent";
+import { SelectedCity } from "@/types";
 
 interface LinkCardProps extends SelectedCity {}
 const LinkCard = (city: LinkCardProps): JSX.Element => {
