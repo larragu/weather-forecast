@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 import DayForecast from "./WeatherCard/DayForecast";
 
-const DailyForecast = ({ days }: { days: any[] }) => {
+const DailyForecast = ({ days }: { days: any[] }): JSX.Element => {
   return (
     <Box justifyContent="center">
       <Typography

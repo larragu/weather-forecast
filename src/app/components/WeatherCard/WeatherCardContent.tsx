@@ -6,7 +6,9 @@ interface BasicWeatherCardContentProps
   title?: React.ReactNode;
   children?: React.ReactNode;
 }
-const WeatherCardContent = (props: BasicWeatherCardContentProps) => {
+const WeatherCardContent = (
+  props: BasicWeatherCardContentProps
+): JSX.Element => {
   const {
     title,
     children,

@@ -7,7 +7,7 @@ interface DayForecastProps extends Omit<BasicWeather, "id"> {
   date: string;
 }
 
-const DayForecast = (props: DayForecastProps) => {
+const DayForecast = (props: DayForecastProps): JSX.Element => {
   const { date: dateString, ...restProps } = props;
 
   const formattedDate = formatForecastDate(dateString);

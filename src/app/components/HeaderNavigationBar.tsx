@@ -7,7 +7,7 @@ const menuItems = [
   { path: "/favorites", label: "Favorites" },
 ];
 
-const HeaderNavigationBar = () => {
+const HeaderNavigationBar = (): JSX.Element => {
   return (
     <header>
       <Box

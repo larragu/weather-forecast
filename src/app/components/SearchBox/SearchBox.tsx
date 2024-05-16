@@ -18,7 +18,7 @@ const SearchBox = ({
   searchResults,
   onSearchBoxChange,
   onSearchBoxInputChange,
-}: SearchBoxProps) => {
+}: SearchBoxProps): JSX.Element => {
   return (
     <Autocomplete
       freeSolo

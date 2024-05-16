@@ -8,7 +8,7 @@ type NoFavoriteProps = { id?: never; showFavoriteButton?: never };
 
 type DetailedWeatherCardProps = Omit<DetailedWeather, "id"> &
   (FavoriteProps | NoFavoriteProps);
-const DetailedWeatherCard = (props: DetailedWeatherCardProps) => {
+const DetailedWeatherCard = (props: DetailedWeatherCardProps): JSX.Element => {
   const {
     id,
     name,

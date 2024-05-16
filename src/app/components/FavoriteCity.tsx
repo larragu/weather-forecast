@@ -9,7 +9,7 @@ interface FavoriteCityProps {
   id: string;
 }
 
-const FavoriteCity = ({ id }: FavoriteCityProps) => {
+const FavoriteCity = ({ id }: FavoriteCityProps): JSX.Element => {
   const { favorites, toggleFavorite } = useWeatherContext();
   // console.log("favorites: ", favorites, id);
 
