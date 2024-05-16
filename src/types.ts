@@ -35,7 +35,7 @@ interface BasicWeather {
   id: string;
   name: string;
   temperature: string;
-  weatherDescription: string;
+  weatherDescription?: string;
   humidity: string;
   windVelocity: string;
   climateIcon: string;
