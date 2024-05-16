@@ -7,15 +7,13 @@ import { DetailedWeather } from "@/types";
 
 const Details = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
-  console.log("DETAILS id: ", id);
+  const decodedId = decodeURI(id);
 
-  const result = await WeatherApi.getDetailedWeather(id, FORECAST_DAYS);
-
-  console.log("descriptive weather: ", result);
+  const result = await WeatherApi.getDetailedWeather(decodedId, FORECAST_DAYS);
 
   const { forecast, ...restCurrent } = result as DetailedWeather;
 
-  console.log("11 : ", restCurrent);
+  console.log("DETAILS decodedId, name: ", decodedId, restCurrent.name);
   return (
     <>
       <Typography variant="h5">Weather Today in {restCurrent.name}</Typography>
