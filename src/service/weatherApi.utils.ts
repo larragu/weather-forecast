@@ -6,10 +6,10 @@ const formatBasicWeather = (result: BasicWeatherDTO) => {
   const basicWeather = {
     id: `${location.name}-${location.region}`,
     name: `${location.name}, ${location.region}`,
-    temperature: current.temp_c.toString(),
+    temperature: `${current.temp_c}° c`,
     weatherDescription: current.condition.text,
-    humidity: current.humidity.toString(),
-    windVelocity: current.wind_kph.toString(),
+    humidity: `${current.humidity}%`,
+    windVelocity: `${current.wind_kph} kph`,
     climateIcon: current.condition.icon,
   };
   return basicWeather;
@@ -21,14 +21,14 @@ const formatDetailedWeather = (cityId: string, results: any) => {
   const detailedWeather = {
     id: cityId,
     name: cityId.replace("-", ", "),
-    temperature: current.temp_c.toString(),
+    temperature: `${current.temp_c}° c`,
     weatherDescription: current.condition.text,
-    humidity: current.humidity.toString(),
-    windVelocity: current.wind_kph.toString(),
+    humidity: `${current.humidity}%`,
+    windVelocity: `${current.wind_kph} kph`,
     climateIcon: current.condition.icon,
     pressure: `${current.pressure_mb} mb`,
     precipitation: `${current.precip_mm} mm`,
-    feelsLike: `${current.feelslike_c} c`,
+    feelsLike: `${current.feelslike_c}° c`,
     forecast: forecast.forecastday.map((forecastday, index: number) => {
       const { date, day } = forecastday;
       const { avgtemp_c, avghumidity, maxwind_mph, condition } = day;
@@ -37,10 +37,10 @@ const formatDetailedWeather = (cityId: string, results: any) => {
         id: index.toString(),
         date: date,
         name: location.name,
-        temperature: avgtemp_c.toString(),
+        temperature: `${avgtemp_c}° c`,
         weatherDescription: "",
-        humidity: avghumidity.toString(),
-        windVelocity: maxwind_mph.toString(),
+        humidity: `${avghumidity}%`,
+        windVelocity: `${maxwind_mph} mph`,
         climateIcon: condition.icon,
       };
     }),
