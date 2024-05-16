@@ -3,7 +3,7 @@ interface SearchBoxOption {
   label: string;
 }
 
-interface CityResult {
+interface CityResultDTO {
   country: string;
   id: number;
   lat: number;
@@ -13,7 +13,7 @@ interface CityResult {
   url: string;
 }
 
-interface SelectedCityDTO {
+interface BasicWeatherDTO {
   location: {
     name: string;
     region: string;
@@ -56,9 +56,9 @@ const exampeCityResult = {
 };
 
 export type {
-  CityResult,
+  CityResultDTO,
   BasicWeather,
   DescriptiveWeather,
-  SelectedCityDTO,
+  BasicWeatherDTO,
   SearchBoxOption,
 };

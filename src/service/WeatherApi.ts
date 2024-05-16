@@ -1,5 +1,5 @@
 import HttpClient from "./HttpClient";
-import { CityResult, BasicWeather, SelectedCityDTO } from "@/types";
+import { CityResultDTO, BasicWeather, BasicWeatherDTO } from "@/types";
 
 const options = {
   method: "GET",
@@ -14,11 +14,11 @@ const baseUrl = "https://weatherapi-com.p.rapidapi.com";
 class WeatherApi {
   static getCities = async (
     searchTerm: string
-  ): Promise<Error | CityResult[]> => {
+  ): Promise<Error | CityResultDTO[]> => {
     if (searchTerm) {
       const url = `${baseUrl}/search.json?q=${searchTerm}`;
 
-      const results = await HttpClient.get<CityResult[]>(url, options);
+      const results = await HttpClient.get<CityResultDTO[]>(url, options);
 
       return results.map((result) => ({
         ...result,
@@ -31,12 +31,11 @@ class WeatherApi {
 
   static getWeather = async (cityId: string): Promise<Error | BasicWeather> => {
     const url = `${baseUrl}/current.json?q=${cityId}`;
-    const result = await HttpClient.get<SelectedCityDTO>(url, options);
+    const result = await HttpClient.get<BasicWeatherDTO>(url, options);
 
     const { location, current } = result;
 
-    const selectedCity = {
-      //id: cityId,
+    const basicWeather = {
       id: `${location.name}-${location.region}`,
       name: `${location.name}, ${location.region}`,
       temperature: current.temp_c.toString(),
@@ -45,10 +44,10 @@ class WeatherApi {
       windVelocity: current.wind_kph.toString(),
       climateIcon: current.condition.icon,
     };
-    return selectedCity;
+    return basicWeather;
   };
 
-  static getDescriptiveWeather = async (
+  static getDetailedWeather = async (
     cityId: string,
     days: number = 3
   ): Promise<Error | BasicWeather> => {
@@ -59,7 +58,7 @@ class WeatherApi {
     const { location, current, forecast } = results;
     const cityName = cityId.replace("-", ", ");
     console.log("hmm:", cityName);
-    const detailedCity = {
+    const detailedWeather = {
       id: cityId,
       name: cityId.replace("-", ", "),
       temperature: current.temp_c.toString(),
@@ -84,13 +83,13 @@ class WeatherApi {
       }),
     };
 
-    return detailedCity;
+    return detailedWeather;
   };
 
-  static getFavorites = async (cityIds: string[]) => {
-    const promises = cityIds.map((cityId) =>
-      this.getDescriptiveWeather(cityId)
-    );
+  static getFavorites = async (
+    cityIds: string[]
+  ): Promise<(Error | BasicWeather)[]> => {
+    const promises = cityIds.map((cityId) => this.getWeather(cityId));
 
     const results = await Promise.all(promises);
 

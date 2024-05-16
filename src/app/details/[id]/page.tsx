@@ -1,4 +1,4 @@
-import { getDescriptiveWeather } from "@/service/weatherClient";
+import { getDetailedWeather } from "@/service/weatherClient";
 import { DescriptiveWeatherCard } from "@/app/components/WeatherCard/";
 import DailyForecast from "@/app/components/DailyForecast";
 import { Typography, Stack } from "@mui/material";
@@ -7,7 +7,7 @@ const Details = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
   console.log("DETAILS: ", id);
 
-  const result = await getDescriptiveWeather(id);
+  const result = await getDetailedWeather(id);
   console.log("descriptive weather: ", result);
 
   const { forecast, ...restCurrent } = result;

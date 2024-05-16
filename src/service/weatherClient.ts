@@ -17,7 +17,7 @@ const getWeather = async (cityName: string): Promise<BasicWeather> => {
   return results;
 };
 
-const getDescriptiveWeather = async (
+const getDetailedWeather = async (
   cityId: string,
   days: number = 3
 ): Promise<DescriptiveWeather> => {
@@ -35,4 +35,4 @@ const getFavorites = async (ids: string[]): Promise<BasicWeather[]> => {
   return results;
 };
 
-export { getCities, getWeather, getDescriptiveWeather, getFavorites };
+export { getCities, getWeather, getDetailedWeather, getFavorites };
