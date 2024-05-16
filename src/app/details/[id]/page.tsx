@@ -12,7 +12,7 @@ const Details = async ({ params }: { params: { id: string } }) => {
 
   const { forecast, ...restCurrent } = result;
 
-  console.log("restCurrent : ", restCurrent);
+  console.log("11 : ", restCurrent);
   return (
     <>
       <Typography gutterBottom variant="h5" component="div">

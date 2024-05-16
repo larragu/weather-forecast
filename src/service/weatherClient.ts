@@ -27,9 +27,9 @@ const getDescriptiveWeather = async (
 ): Promise<DescriptiveWeather> => {
   console.log("process.env.BASE_PATH: ", process.env.BASE_PATH);
   const url = `${BASE_PATH}/details/api/?id=${cityId}&days=${days}`;
-  const results = await HttpClient.get<DescriptiveWeather>(url);
-
-  return results;
+  const result = await HttpClient.get<DescriptiveWeather>(url);
+  console.log("result.id foo: ", result.id);
+  return result;
 };
 
 const getFavorites = async (ids: string[]): Promise<SelectedCity[]> => {

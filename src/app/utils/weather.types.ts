@@ -52,4 +52,10 @@ const exampeCityResult = {
   url: "chicago-illinois-united-states-of-america",
 };
 
-export type { SelectedCity, CityResult, BasicWeather, DescriptiveWeather };
+export type {
+  SelectedCity,
+  CityResult,
+  BasicWeather,
+  DescriptiveWeather,
+  SelectedCityDTO,
+};

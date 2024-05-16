@@ -10,7 +10,7 @@ type DescriptiveWeatherCardProps = Omit<DescriptiveWeather, "id"> &
   (FavoriteProps | NoFavoriteProps);
 const DescriptiveWeatherCard = (props: DescriptiveWeatherCardProps) => {
   const { id, showFavoriteButton, ...restProps } = props;
-
+  console.log("id: ", showFavoriteButton, id);
   return (
     <Card>
       <CardContent>

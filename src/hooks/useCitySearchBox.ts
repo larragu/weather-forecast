@@ -15,6 +15,7 @@ interface UseCitySearchBoxProps {
 }
 
 const getSearchResults = async (searchTerm: string) => {
+  console.log("yoyo: ", searchTerm);
   const cities = await getCities(searchTerm);
   const formattedCities = cities?.map((city) => ({
     id: `${city.lat}, ${city.lon}`,
