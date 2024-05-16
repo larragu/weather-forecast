@@ -1,12 +1,14 @@
-import { Stack, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import FavoriteCities from "../components/FavoriteCities";
 
 const Favorites = async () => {
   return (
-    <>
-      <Typography variant="h5">Favorites</Typography>
+    <Box justifyContent="center">
+      <Typography variant="h5" marginBottom={4} textAlign="center">
+        Favorites
+      </Typography>
       <FavoriteCities />
-    </>
+    </Box>
   );
 };
 

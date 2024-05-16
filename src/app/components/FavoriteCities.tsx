@@ -31,30 +31,18 @@ const FavoriteCities = (): JSX.Element | null => {
       container
       rowSpacing={{ xs: 2, sm: 4 }}
       columnSpacing={{ sm: 2, md: 4 }}
+      justifyContent="center"
     >
       {favorites?.map((favorite) => {
         const { id, name, ...restFavorite } = favorite;
 
         const title = (
-          <Typography
-            variant="h5"
-            fontSize={{ xs: 16, sm: 18 }}
-            component="div"
-            noWrap
-          >
+          <Typography variant="h5" fontSize={{ xs: 16, sm: 18 }} noWrap>
             {name}
           </Typography>
         );
         return (
-          <Grid
-            key={id}
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            justifyContent="center"
-            border="1px solid red"
-          >
+          <Grid key={id} item xs={12} sm={6} md={4} justifyContent="center">
             <Box width={{ md: "275px" }} margin="auto">
               <LinkCard url={`/details/${id}`}>
                 <WeatherCardContent {...restFavorite} title={title} />

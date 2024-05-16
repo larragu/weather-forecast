@@ -4,12 +4,7 @@ import DayForecast from "./WeatherCard/DayForecast";
 const DailyForecast = ({ days }: { days: any[] }): JSX.Element => {
   return (
     <Box justifyContent="center">
-      <Typography
-        variant="h5"
-        component="div"
-        textAlign="center"
-        marginBottom={4}
-      >
+      <Typography variant="h5" textAlign="center" marginBottom={4}>
         Forecast
       </Typography>
       <Grid
