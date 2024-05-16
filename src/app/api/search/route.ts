@@ -1,11 +1,8 @@
-import WeatherApiMock from "@/mocks/WeatherApiMock";
 import WeatherApi from "@/service/WeatherApi";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const searchTerm = searchParams.get("searchTerm") || "";
-
-  //const results = await WeatherApiMock.getCities(searchTerm);
 
   const results = await WeatherApi.getCities(searchTerm);
 

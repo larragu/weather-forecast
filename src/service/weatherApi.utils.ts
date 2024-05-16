@@ -3,6 +3,7 @@ import {
   BasicWeatherDTO,
   DetailedWeather,
   DetailedWeatherDTO,
+  ForecastWeather,
 } from "@/types";
 
 const formatBasicWeather = (result: BasicWeatherDTO): BasicWeather => {
@@ -43,8 +44,8 @@ const formatDetailedWeather = (
 };
 const formatForecast = (
   forecast: DetailedWeatherDTO["forecast"]
-): DetailedWeather["forecast"] => {
-  return forecast.forecastday.map((forecastday, index: number) => {
+): ForecastWeather[] => {
+  return forecast.forecastday.map((forecastday) => {
     const { date, day } = forecastday;
     const { avgtemp_c, avghumidity, maxwind_kph, condition } = day;
 

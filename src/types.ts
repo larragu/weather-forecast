@@ -24,8 +24,7 @@ interface BasicWeatherDTO {
       text: string; //Climate Description
       icon: string; //Climate Icon
     };
-    wind_mph: number; //Wind Velocity
-    wind_kph: number; //Wind Velocity
+    wind_kph: number; //Wind Velocity in kilometers
     humidity: number; //Humidity
   };
 }
@@ -75,21 +74,11 @@ interface ForecastWeather extends BasicWeather {
 }
 
 interface DetailedWeather extends BasicWeather {
-  pressure: string; //pressure in millibars pressure_mb
-  precipitation: string; // precipitation in millimeters precip_mm
-  feelsLike: string; //feels like in millimeters feelslike_c
+  pressure: string;
+  precipitation: string;
+  feelsLike: string;
   forecast?: ForecastWeather[];
 }
-
-const exampeCityResult = {
-  country: "United States of America",
-  id: 2566581,
-  latitude: 41.85,
-  longitude: -87.65,
-  name: "Chicago",
-  region: "Illinois",
-  url: "chicago-illinois-united-states-of-america",
-};
 
 export type {
   CityResultDTO,

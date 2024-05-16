@@ -52,15 +52,15 @@ const exampleSelectedCity = {
     region: "Illinois",
   },
   current: {
-    temp_c: 12.2, //Temperature
-    temp_f: 54, //Temperature
+    temp_c: 12.2,
+    temp_f: 54,
     condition: {
-      text: "Partly cloudy", //Climate Description
-      icon: "//cdn.weatherapi.com/weather/64x64/day/116.png", //Climate Icon
+      text: "Partly cloudy",
+      icon: "//cdn.weatherapi.com/weather/64x64/day/116.png",
     },
-    wind_mph: 12.5, //Wind Velocity
-    wind_kph: 20.2, //Wind Velocity
-    humidity: 72, //Humidity
+    wind_mph: 12.5,
+    wind_kph: 20.2,
+    humidity: 72,
   },
 };
 
