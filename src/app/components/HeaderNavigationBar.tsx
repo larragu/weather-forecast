@@ -1,11 +1,6 @@
-import NextLink from "next/link";
-import { Box, List, ListItem, Link as MuiLink } from "@mui/material";
+import { Box, List } from "@mui/material";
 import CitySearchBox from "./CitySearchBox/CitySearchBox";
-
-const menuItems = [
-  { path: "/", label: "Home" },
-  { path: "/favorites", label: "Favorites" },
-];
+import MenuItems from "./MenuItems";
 
 const HeaderNavigationBar = (): JSX.Element => {
   return (
@@ -27,13 +22,7 @@ const HeaderNavigationBar = (): JSX.Element => {
               justifyContent: "center",
             }}
           >
-            {menuItems.map(({ path, label }) => (
-              <ListItem key={path}>
-                <MuiLink underline="hover" component={NextLink} href={path}>
-                  {label}
-                </MuiLink>
-              </ListItem>
-            ))}
+            <MenuItems />
           </List>
         </Box>
       </Box>
