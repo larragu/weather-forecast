@@ -16,7 +16,9 @@ const Details = async ({ params }: { params: { id: string } }) => {
   console.log("DETAILS decodedId, name: ", decodedId, restCurrent.name);
   return (
     <>
-      <Typography variant="h5">Weather Today in {restCurrent.name}</Typography>
+      <Typography variant="h5" marginBottom={4}>
+        Weather Today in {restCurrent.name}
+      </Typography>
       <Stack spacing={6} alignItems="center">
         <DetailedWeatherCard showFavoriteButton={true} {...restCurrent} />
         {forecast ? <DailyForecast days={forecast} /> : null}

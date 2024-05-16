@@ -7,7 +7,8 @@ const DailyForecast = ({ days }: { days: any[] }): JSX.Element => {
       <Typography
         variant="h5"
         component="div"
-        textAlign={{ xs: "center", sm: "left" }}
+        textAlign="center"
+        marginBottom={4}
       >
         Forecast
       </Typography>
