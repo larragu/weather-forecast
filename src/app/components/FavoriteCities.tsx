@@ -12,7 +12,7 @@ const FavoriteCities = (): JSX.Element | null => {
   const [favorites, setFavorites] = useState<SelectedCity[]>([]);
 
   useEffect(() => {
-    if (localStorageFavorites) {
+    if (localStorageFavorites && localStorageFavorites.length > 0) {
       const fetchData = async () => {
         const result = await getFavorites(localStorageFavorites);
         setFavorites(result);
