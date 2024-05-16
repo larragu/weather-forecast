@@ -2,21 +2,22 @@ import { SelectedCity } from "@/app/utils/weather.types";
 
 type State = {
   selectedCity: SelectedCity | null;
-  favorites: string[];
+  favorites: string[] | null;
 };
 
 export enum ACTIONS {
   SET_SELECTED_CITY = "setSelectedCity",
   TOGGLE_FAVORITE = "toggleFavorite",
+  SET_FAVORITES = "setFavorites",
 }
 export type ReducerWithAction = {
   type: ACTIONS;
-  payload?: SelectedCity | string;
+  payload?: SelectedCity | string | string[] | null;
 };
 
 export const initialState: State = {
   selectedCity: null,
-  favorites: [],
+  favorites: null,
 };
 
 export const weatherReducer = (
@@ -24,27 +25,35 @@ export const weatherReducer = (
   action: ReducerWithAction
 ): State => {
   switch (action.type) {
-    case ACTIONS.SET_SELECTED_CITY:
+    case ACTIONS.SET_SELECTED_CITY: {
       return {
         ...state,
         selectedCity: action.payload as SelectedCity,
       };
-    case ACTIONS.TOGGLE_FAVORITE:
+    }
+    case ACTIONS.TOGGLE_FAVORITE: {
+      const favorites = state.favorites || [];
       const newFavorite = action.payload as string;
       let newFavorites;
 
-      if (state.favorites.includes(newFavorite)) {
-        newFavorites = state.favorites.filter(
-          (favorite) => favorite !== newFavorite
-        );
+      if (favorites.includes(newFavorite)) {
+        newFavorites = favorites.filter((favorite) => favorite !== newFavorite);
       } else {
-        newFavorites = [...state.favorites, newFavorite];
+        newFavorites = [...favorites, newFavorite];
       }
 
       return {
         ...state,
         favorites: newFavorites,
       };
+    }
+    case ACTIONS.SET_FAVORITES: {
+      const newFavorites = action.payload as string[];
+      return {
+        ...state,
+        favorites: newFavorites,
+      };
+    }
     default:
       return state;
   }

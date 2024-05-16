@@ -11,13 +11,13 @@ interface FavoriteCityProps {
 
 const FavoriteCity = ({ id }: FavoriteCityProps) => {
   const { favorites, toggleFavorite } = useWeatherContext();
-  console.log("favorites: ", favorites, id);
+  // console.log("favorites: ", favorites, id);
 
   const toggleFavoriteHandler = () => {
     toggleFavorite(id);
   };
 
-  const isFavorite = favorites.find((favorite) => favorite === id);
+  const isFavorite = favorites?.find((favorite) => favorite === id);
 
   return (
     <IconButton onClick={toggleFavoriteHandler} aria-label="favorite">
