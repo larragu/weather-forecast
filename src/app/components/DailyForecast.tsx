@@ -15,6 +15,7 @@ const DailyForecast = ({ days }: { days: any[] }): JSX.Element => {
         container
         rowSpacing={{ xs: 2, sm: 4 }}
         columnSpacing={{ sm: 2, md: 4 }}
+        justifyContent="center"
       >
         {days?.map((day) => (
           <Grid
@@ -25,9 +26,7 @@ const DailyForecast = ({ days }: { days: any[] }): JSX.Element => {
             md={3}
             justifyContent="center"
           >
-            <Box width={{ sm: "200px" }} margin="auto">
-              <DayForecast {...day} />
-            </Box>
+            <DayForecast {...day} />
           </Grid>
         ))}
       </Grid>

@@ -17,7 +17,7 @@ const Details = async ({ params }: { params: { id: string } }) => {
   return (
     <>
       <Typography variant="h5">Weather Today in {restCurrent.name}</Typography>
-      <Stack spacing={6} paddingX={{ sm: 2 }} paddingY={{ xs: 2 }}>
+      <Stack spacing={6} alignItems="center">
         <DetailedWeatherCard showFavoriteButton={true} {...restCurrent} />
         {forecast ? <DailyForecast days={forecast} /> : null}
       </Stack>
