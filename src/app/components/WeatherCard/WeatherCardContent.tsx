@@ -4,10 +4,12 @@ import { BasicWeather } from "@/types";
 interface BasicWeatherCardContentProps
   extends Omit<BasicWeather, "id" | "name"> {
   title?: React.ReactNode;
+  children?: React.ReactNode;
 }
-const BasicWeatherCardContent = (props: BasicWeatherCardContentProps) => {
+const WeatherCardContent = (props: BasicWeatherCardContentProps) => {
   const {
     title,
+    children,
     temperature,
     weatherDescription,
     humidity,
@@ -32,6 +34,7 @@ const BasicWeatherCardContent = (props: BasicWeatherCardContentProps) => {
       <Typography variant="body2" color="text.secondary">
         Wind Velocity: {windVelocity}
       </Typography>
+      {children}
       <Typography variant="body2" color="text.secondary">
         <img
           src={climateIcon}
@@ -44,4 +47,4 @@ const BasicWeatherCardContent = (props: BasicWeatherCardContentProps) => {
   );
 };
 
-export default BasicWeatherCardContent;
+export default WeatherCardContent;

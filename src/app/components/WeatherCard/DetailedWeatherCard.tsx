@@ -1,5 +1,5 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
-import BasicWeatherCardContent from "./BasicWeatherCardContent";
+import WeatherCardContent from "./WeatherCardContent";
 import { DetailedWeather } from "@/types";
 import FavoriteCity from "../FavoriteCity";
 
@@ -30,13 +30,16 @@ const DetailedWeatherCard = (props: DetailedWeatherCardProps) => {
             </Box>
           ) : null}
         </Box>
-        <BasicWeatherCardContent {...restProps} />
-        <Typography variant="body2" color="text.secondary">
-          Pressure: {pressure}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Precipitation: {precipitation}
-        </Typography>
+        <WeatherCardContent {...restProps}>
+          <>
+            <Typography variant="body2" color="text.secondary">
+              Pressure: {pressure}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Precipitation: {precipitation}
+            </Typography>
+          </>
+        </WeatherCardContent>
       </CardContent>
     </Card>
   );

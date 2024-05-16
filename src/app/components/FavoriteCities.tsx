@@ -6,7 +6,7 @@ import { getFavorites } from "@/service/weatherClient";
 import { useEffect, useState } from "react";
 import { BasicWeather } from "@/types";
 import { Stack, Typography, Box, Grid } from "@mui/material";
-import BasicWeatherCardContent from "./WeatherCard/BasicWeatherCardContent";
+import WeatherCardContent from "./WeatherCard/WeatherCardContent";
 
 const FavoriteCities = (): JSX.Element | null => {
   const { localStorageFavorites } = useLocalStorage();
@@ -49,7 +49,7 @@ const FavoriteCities = (): JSX.Element | null => {
           <Grid key={id} item xs={12} sm={6} md={4} justifyContent="center">
             <Box width={{ md: "275px" }}>
               <LinkCard url={`/details/${id}`}>
-                <BasicWeatherCardContent {...restFavorite} title={title} />
+                <WeatherCardContent {...restFavorite} title={title} />
               </LinkCard>
             </Box>
           </Grid>

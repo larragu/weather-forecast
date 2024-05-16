@@ -1,6 +1,6 @@
 import { BasicWeather } from "@/types";
 import { Card, CardContent, Typography } from "@mui/material";
-import BasicWeatherCardContent from "./BasicWeatherCardContent";
+import WeatherCardContent from "./WeatherCardContent";
 import { formatForecastDate } from "@/utils";
 
 interface DayForecastProps extends Omit<BasicWeather, "id"> {
@@ -15,7 +15,7 @@ const DayForecast = (props: DayForecastProps) => {
     <Card>
       <CardContent>
         <Typography variant="h5">{formattedDate}</Typography>
-        <BasicWeatherCardContent {...restProps} />
+        <WeatherCardContent {...restProps} />
       </CardContent>
     </Card>
   );

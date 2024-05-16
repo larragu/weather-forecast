@@ -1,7 +1,7 @@
 "use client";
 import { Typography } from "@mui/material";
 import { LinkCard } from ".";
-import BasicWeatherCardContent from "./BasicWeatherCardContent";
+import WeatherCardContent from "./WeatherCardContent";
 import { BasicWeather } from "@/types";
 
 interface ClickableWeatherCardProps extends Omit<BasicWeather, "id"> {
@@ -19,7 +19,7 @@ const ClickableWeatherCard = (
   );
   return (
     <LinkCard key={url} url={url}>
-      <BasicWeatherCardContent {...weatherCard} title={title} />
+      <WeatherCardContent {...weatherCard} title={title} />
     </LinkCard>
   );
 };
