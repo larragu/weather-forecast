@@ -1,5 +1,10 @@
 import HttpClient from "./HttpClient";
-import { CityResultDTO, BasicWeather, BasicWeatherDTO } from "@/types";
+import {
+  CityResultDTO,
+  BasicWeather,
+  BasicWeatherDTO,
+  DetailedWeather,
+} from "@/types";
 import {
   formatBasicWeather,
   formatDetailedWeather,
@@ -46,7 +51,7 @@ class WeatherApi {
   static getDetailedWeather = async (
     cityId: string,
     days: number
-  ): Promise<Error | BasicWeather> => {
+  ): Promise<Error | DetailedWeather> => {
     const promises = [];
     for (let index = 1; index <= days; index += 1) {
       const nextDay = createNextDateString(index);

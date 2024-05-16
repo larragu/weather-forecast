@@ -1,16 +1,19 @@
-import { getDetailedWeather } from "@/service/weatherClient";
 import { DetailedWeatherCard } from "@/app/components/WeatherCard/";
 import DailyForecast from "@/app/components/DailyForecast";
-import { Typography, Stack, Box } from "@mui/material";
+import { Typography, Stack } from "@mui/material";
+import WeatherApi from "@/service/WeatherApi";
+import { FORECAST_DAYS } from "@/constants";
+import { DetailedWeather } from "@/types";
 
 const Details = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
-  console.log("DETAILS: ", id);
+  console.log("DETAILS id: ", id);
 
-  const result = await getDetailedWeather(id);
+  const result = await WeatherApi.getDetailedWeather(id, FORECAST_DAYS);
+
   console.log("descriptive weather: ", result);
 
-  const { forecast, ...restCurrent } = result;
+  const { forecast, ...restCurrent } = result as DetailedWeather;
 
   console.log("11 : ", restCurrent);
   return (
