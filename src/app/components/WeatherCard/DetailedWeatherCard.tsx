@@ -1,7 +1,7 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import WeatherCardContent from "./WeatherCardContent";
 import { DetailedWeather } from "@/types";
-import FavoriteCity from "../FavoriteCity";
+import FavoriteCityButton from "../FavoriteCityButton";
 
 type FavoriteProps = { id: string; showFavoriteButton: boolean };
 type NoFavoriteProps = { id?: never; showFavoriteButton?: never };
@@ -26,7 +26,7 @@ const DetailedWeatherCard = (props: DetailedWeatherCardProps): JSX.Element => {
           <Typography variant="h5">Feels like {feelsLike}</Typography>
           {showFavoriteButton ? (
             <Box display="flex" justifyContent="flex-end">
-              <FavoriteCity id={id} />
+              <FavoriteCityButton id={id} />
             </Box>
           ) : null}
         </Box>

@@ -9,9 +9,8 @@ interface FavoriteCityProps {
   id: string;
 }
 
-const FavoriteCity = ({ id }: FavoriteCityProps): JSX.Element => {
+const FavoriteCityButton = ({ id }: FavoriteCityProps): JSX.Element => {
   const { favorites, toggleFavorite } = useWeatherContext();
-  // console.log("favorites: ", favorites, id);
 
   const toggleFavoriteHandler = () => {
     toggleFavorite(id);
@@ -26,4 +25,4 @@ const FavoriteCity = ({ id }: FavoriteCityProps): JSX.Element => {
   );
 };
 
-export default FavoriteCity;
+export default FavoriteCityButton;
