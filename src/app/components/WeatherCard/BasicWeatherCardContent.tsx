@@ -11,7 +11,7 @@ const BasicWeatherCardContent = (props: BasicWeatherCardContentProps) => {
     windVelocity,
     climateIcon,
   } = props;
-  console.log("name foo: ", name);
+  console.log("BasicWeatherCardContent name: ", name);
   return (
     <>
       <Typography gutterBottom variant="h5" component="div">

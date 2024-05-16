@@ -1,10 +1,10 @@
-import { SelectedCard } from "./components/WeatherCard";
+import SelectedWeatherCard from "./components/WeatherCard/SelectedWeatherCard";
 
 export default function Home() {
   return (
     <>
       home page
-      <SelectedCard />
+      <SelectedWeatherCard />
     </>
   );
   //return <main className={styles.main}>home page</main>;
