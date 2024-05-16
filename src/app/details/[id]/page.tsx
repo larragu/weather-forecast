@@ -13,7 +13,6 @@ const Details = async ({ params }: { params: { id: string } }) => {
 
   const { forecast, ...restCurrent } = result as DetailedWeather;
 
-  console.log("DETAILS decodedId, name: ", decodedId, restCurrent.name);
   return (
     <>
       <Typography variant="h5" marginBottom={4}>

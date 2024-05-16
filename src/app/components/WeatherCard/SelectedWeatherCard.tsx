@@ -5,7 +5,6 @@ import { ClickableWeatherCard } from ".";
 
 const SelectedWeatherCard = (): JSX.Element | null => {
   const { selectedCity } = useWeatherContext();
-  console.log("selectedCity: ", selectedCity);
 
   if (!selectedCity) {
     return null;

@@ -44,7 +44,6 @@ class WeatherApiMock {
   };
 
   static getDetailedWeather = async (cityId: string, _days: number) => {
-    console.log("exampleDetailedCity.forecast: ", exampleDetailedCity.forecast);
     const results = await new Promise<DetailedWeather>((resolve) => {
       setTimeout(() => {
         const detailedCity = formatDetailedWeather(cityId, exampleDetailedCity);

@@ -1,11 +1,13 @@
+import { Typography } from "@mui/material";
 import SelectedWeatherCard from "./components/WeatherCard/SelectedWeatherCard";
 
 export default function Home() {
   return (
     <>
-      home page
+      <Typography variant="h5" marginBottom={4}>
+        Welcome!
+      </Typography>
       <SelectedWeatherCard />
     </>
   );
-  //return <main className={styles.main}>home page</main>;
 }

@@ -21,7 +21,7 @@ const getDetailedWeather = async (
 ): Promise<DetailedWeather> => {
   const url = `/api/details/?id=${cityId}&days=${days}`;
   const result = await HttpClient.get<DetailedWeather>(url);
-  console.log("result.id foo: ", result.id);
+
   return result;
 };
 
