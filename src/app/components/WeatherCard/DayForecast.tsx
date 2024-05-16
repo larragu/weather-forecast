@@ -1,10 +1,10 @@
+import { BasicWeather } from "@/app/utils/weather.types";
 import { DescriptiveWeatherCard } from ".";
 
-interface DayForecastProps {
+interface DayForecastProps extends BasicWeather {
   date: string;
 }
 const DayForecast = (props: DayForecastProps) => {
-  const { date } = props;
   return <DescriptiveWeatherCard {...props} />;
 };
 

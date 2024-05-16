@@ -12,6 +12,7 @@ interface SearchBoxProps {
   searchResults: SearchBoxOption[];
   searchValue: string | null;
 }
+
 const SearchBox = ({
   searchValue,
   searchResults,

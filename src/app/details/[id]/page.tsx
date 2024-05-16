@@ -12,7 +12,7 @@ const Details = async ({ params }: { params: { id: string } }) => {
 
   const { forecast, ...restCurrent } = result;
 
-  console.log("current : ", restCurrent);
+  console.log("restCurrent : ", restCurrent);
   return (
     <>
       <Typography gutterBottom variant="h5" component="div">
@@ -20,7 +20,7 @@ const Details = async ({ params }: { params: { id: string } }) => {
       </Typography>
       <Stack spacing={6} paddingX={{ sm: 2 }} paddingY={{ xs: 2 }}>
         <DescriptiveWeatherCard showFavoriteButton={true} {...restCurrent} />
-        <DailyForecast days={forecast} />
+        {forecast ? <DailyForecast days={forecast} /> : null}
       </Stack>
     </>
   );

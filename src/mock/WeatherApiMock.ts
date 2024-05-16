@@ -64,16 +64,18 @@ class WeatherApiMock {
           humidity: exampleDetailedCity.current.humidity.toString(),
           windVelocity: exampleDetailedCity.current.wind_kph.toString(),
           climateIcon: exampleDetailedCity.current.condition.icon,
-
-          forecast: forecast.forecastday.map((forecastday) => {
+          forecast: forecast.forecastday.map((forecastday, index) => {
             const { date, day } = forecastday;
             const { avgtemp_c, avghumidity, maxwind_mph, condition } = day;
 
             return {
+              id: index.toString(),
               date: date,
-              temperature: avgtemp_c,
-              humidity: avghumidity,
-              windVelocity: maxwind_mph,
+              name: exampleDetailedCity.location.name,
+              temperature: avgtemp_c.toString(),
+              weatherDescription: "",
+              humidity: avghumidity.toString(),
+              windVelocity: maxwind_mph.toString(),
               climateIcon: condition.icon,
             };
           }),
