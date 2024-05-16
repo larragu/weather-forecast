@@ -1,6 +1,11 @@
 import HttpClient from "./HttpClient";
 import { CityResultDTO, BasicWeather, BasicWeatherDTO } from "@/types";
-import { formatBasicWeather, formatDetailedWeather } from "./weatherApi.utils";
+import {
+  formatBasicWeather,
+  formatDetailedWeather,
+  formatForecast,
+} from "./weatherApi.utils";
+import { createNextDateString } from "@/utils";
 
 const options = {
   method: "GET",
@@ -40,13 +45,31 @@ class WeatherApi {
 
   static getDetailedWeather = async (
     cityId: string,
-    days: number = 3
+    days: number
   ): Promise<Error | BasicWeather> => {
-    const url = `${baseUrl}/forecast.json?q=${cityId}&days=${days}`;
+    const promises = [];
+    for (let index = 1; index <= days; index += 1) {
+      const nextDay = createNextDateString(index);
+      const url = `${baseUrl}/forecast.json?q=${cityId}&dt=${nextDay}`;
 
-    const results = await HttpClient.get<any>(url, options);
+      promises.push(HttpClient.get<any>(url, options));
+    }
 
-    const detailedWeather = formatDetailedWeather(cityId, results);
+    const details = await Promise.all(promises);
+    let formattedForecasts: BasicWeather[] = [];
+    let formattedDetails = formatDetailedWeather(cityId, details[0]);
+
+    details.forEach((detail) => {
+      const newForecast = formatForecast(detail.forecast);
+      if (newForecast) {
+        formattedForecasts.push(newForecast[0]);
+      }
+    });
+
+    const detailedWeather = {
+      ...formattedDetails,
+      forecast: formattedForecasts,
+    };
 
     return detailedWeather;
   };

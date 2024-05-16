@@ -24,7 +24,7 @@ const formatDetailedWeather = (
   cityId: string,
   results: DetailedWeatherDTO
 ): DetailedWeather => {
-  const { current, forecast } = results;
+  const { current } = results;
 
   const detailedWeather = {
     id: cityId,
@@ -37,23 +37,27 @@ const formatDetailedWeather = (
     pressure: `${current.pressure_mb} mb`,
     precipitation: `${current.precip_mm} mm`,
     feelsLike: `${current.feelslike_c}° c`,
-    forecast: forecast.forecastday.map((forecastday, index: number) => {
-      const { date, day } = forecastday;
-      const { avgtemp_c, avghumidity, maxwind_kph, condition } = day;
-
-      return {
-        id: index.toString(),
-        name: "",
-        date: date,
-        temperature: `${avgtemp_c}° c`,
-        weatherDescription: "",
-        humidity: `${avghumidity}%`,
-        windVelocity: `${maxwind_kph} kph`,
-        climateIcon: condition.icon,
-      };
-    }),
   };
+
   return detailedWeather;
 };
+const formatForecast = (
+  forecast: DetailedWeatherDTO["forecast"]
+): DetailedWeather["forecast"] => {
+  return forecast.forecastday.map((forecastday, index: number) => {
+    const { date, day } = forecastday;
+    const { avgtemp_c, avghumidity, maxwind_kph, condition } = day;
 
-export { formatBasicWeather, formatDetailedWeather };
+    return {
+      id: index.toString(),
+      name: "",
+      date: date,
+      temperature: `${avgtemp_c}° c`,
+      weatherDescription: "",
+      humidity: `${avghumidity}%`,
+      windVelocity: `${maxwind_kph} kph`,
+      climateIcon: condition.icon,
+    };
+  });
+};
+export { formatBasicWeather, formatDetailedWeather, formatForecast };

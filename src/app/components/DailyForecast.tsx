@@ -22,7 +22,7 @@ const DailyForecast = ({ days }: { days: any[] }) => {
             item
             xs={12}
             sm={6}
-            md={4}
+            md={3}
             justifyContent="center"
           >
             <Box width={{ sm: "200px" }}>
