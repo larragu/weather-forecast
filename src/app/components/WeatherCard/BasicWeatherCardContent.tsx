@@ -1,22 +1,23 @@
 import { Typography } from "@mui/material";
 import { BasicWeather } from "@/types";
 
-interface BasicWeatherCardContentProps extends Omit<BasicWeather, "id"> {}
+interface BasicWeatherCardContentProps
+  extends Omit<BasicWeather, "id" | "name"> {
+  title?: React.ReactNode;
+}
 const BasicWeatherCardContent = (props: BasicWeatherCardContentProps) => {
   const {
-    name,
+    title,
     temperature,
     weatherDescription,
     humidity,
     windVelocity,
     climateIcon,
   } = props;
-  console.log("BasicWeatherCardContent name: ", name);
+
   return (
     <>
-      <Typography gutterBottom variant="h5" component="div">
-        {name}
-      </Typography>
+      {title ? title : null}
       <Typography variant="body2" color="text.secondary">
         Temperature: {temperature}
       </Typography>

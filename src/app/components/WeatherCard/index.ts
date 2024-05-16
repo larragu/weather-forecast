@@ -1,6 +1,6 @@
 import SelectedCard from "./ClickableWeatherCard";
-import DescriptiveWeatherCard from "./DescriptiveWeatherCard";
+import DetailedWeatherCard from "./DetailedWeatherCard";
 import LinkCard from "../Card/LinkCard";
 import ClickableWeatherCard from "./ClickableWeatherCard";
 
-export { SelectedCard, DescriptiveWeatherCard, LinkCard, ClickableWeatherCard };
+export { SelectedCard, DetailedWeatherCard, LinkCard, ClickableWeatherCard };

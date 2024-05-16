@@ -1,5 +1,5 @@
 import { getDetailedWeather } from "@/service/weatherClient";
-import { DescriptiveWeatherCard } from "@/app/components/WeatherCard/";
+import { DetailedWeatherCard } from "@/app/components/WeatherCard/";
 import DailyForecast from "@/app/components/DailyForecast";
 import { Typography, Stack } from "@mui/material";
 
@@ -19,7 +19,7 @@ const Details = async ({ params }: { params: { id: string } }) => {
         Weather Today in {restCurrent.name}
       </Typography>
       <Stack spacing={6} paddingX={{ sm: 2 }} paddingY={{ xs: 2 }}>
-        <DescriptiveWeatherCard showFavoriteButton={true} {...restCurrent} />
+        <DetailedWeatherCard showFavoriteButton={true} {...restCurrent} />
         {forecast ? <DailyForecast days={forecast} /> : null}
       </Stack>
     </>

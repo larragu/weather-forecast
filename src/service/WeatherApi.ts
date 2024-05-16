@@ -1,5 +1,6 @@
 import HttpClient from "./HttpClient";
 import { CityResultDTO, BasicWeather, BasicWeatherDTO } from "@/types";
+import { formatBasicWeather, formatDetailedWeather } from "./weatherApi.utils";
 
 const options = {
   method: "GET",
@@ -33,17 +34,7 @@ class WeatherApi {
     const url = `${baseUrl}/current.json?q=${cityId}`;
     const result = await HttpClient.get<BasicWeatherDTO>(url, options);
 
-    const { location, current } = result;
-
-    const basicWeather = {
-      id: `${location.name}-${location.region}`,
-      name: `${location.name}, ${location.region}`,
-      temperature: current.temp_c.toString(),
-      weatherDescription: current.condition.text,
-      humidity: current.humidity.toString(),
-      windVelocity: current.wind_kph.toString(),
-      climateIcon: current.condition.icon,
-    };
+    const basicWeather = formatBasicWeather(result);
     return basicWeather;
   };
 
@@ -55,33 +46,7 @@ class WeatherApi {
 
     const results = await HttpClient.get<any>(url, options);
 
-    const { location, current, forecast } = results;
-    const cityName = cityId.replace("-", ", ");
-    console.log("hmm:", cityName);
-    const detailedWeather = {
-      id: cityId,
-      name: cityId.replace("-", ", "),
-      temperature: current.temp_c.toString(),
-      weatherDescription: current.condition.text,
-      humidity: current.humidity.toString(),
-      windVelocity: current.wind_kph.toString(),
-      climateIcon: current.condition.icon,
-      forecast: forecast.forecastday.map((forecastday, index: number) => {
-        const { date, day } = forecastday;
-        const { avgtemp_c, avghumidity, maxwind_mph, condition } = day;
-
-        return {
-          id: index.toString(),
-          date: date,
-          name: location.name,
-          temperature: avgtemp_c.toString(),
-          weatherDescription: "",
-          humidity: avghumidity.toString(),
-          windVelocity: maxwind_mph.toString(),
-          climateIcon: condition.icon,
-        };
-      }),
-    };
+    const detailedWeather = formatDetailedWeather(cityId, results);
 
     return detailedWeather;
   };

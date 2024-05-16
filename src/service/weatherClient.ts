@@ -1,12 +1,12 @@
 import HttpClient from "./HttpClient";
-import { CityResult, DescriptiveWeather, BasicWeather } from "@/types";
+import { CityResultDTO, DetailedWeather, BasicWeather } from "@/types";
 
 const BASE_PATH = process.env.BASE_PATH;
 
-const getCities = async (searchTerm: string): Promise<CityResult[]> => {
+const getCities = async (searchTerm: string): Promise<CityResultDTO[]> => {
   const url = `/search/api/?searchTerm=${searchTerm}`;
 
-  const results = await HttpClient.get<CityResult[]>(url);
+  const results = await HttpClient.get<CityResultDTO[]>(url);
   return results;
 };
 
@@ -20,10 +20,10 @@ const getWeather = async (cityName: string): Promise<BasicWeather> => {
 const getDetailedWeather = async (
   cityId: string,
   days: number = 3
-): Promise<DescriptiveWeather> => {
+): Promise<DetailedWeather> => {
   console.log("process.env.BASE_PATH: ", process.env.BASE_PATH);
   const url = `${BASE_PATH}/details/api/?id=${cityId}&days=${days}`;
-  const result = await HttpClient.get<DescriptiveWeather>(url);
+  const result = await HttpClient.get<DetailedWeather>(url);
   console.log("result.id foo: ", result.id);
   return result;
 };

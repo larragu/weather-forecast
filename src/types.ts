@@ -41,14 +41,17 @@ interface BasicWeather {
   climateIcon: string;
 }
 
-interface DescriptiveWeather extends BasicWeather {
+interface DetailedWeather extends BasicWeather {
+  pressure: string; //pressure in millibars pressure_mb
+  precipitation: string; // precipitation in millimeters precip_mm
+  feelsLike: string; //feels like in millimeters feelslike_c
   forecast?: BasicWeather[];
 }
 
 const exampeCityResult = {
   country: "United States of America",
   id: 2566581,
-  latitude: 41.85, // use latitude and longitude as id
+  latitude: 41.85,
   longitude: -87.65,
   name: "Chicago",
   region: "Illinois",
@@ -58,7 +61,7 @@ const exampeCityResult = {
 export type {
   CityResultDTO,
   BasicWeather,
-  DescriptiveWeather,
+  DetailedWeather,
   BasicWeatherDTO,
   SearchBoxOption,
 };

@@ -1,4 +1,5 @@
 "use client";
+import { Typography } from "@mui/material";
 import { LinkCard } from ".";
 import BasicWeatherCardContent from "./BasicWeatherCardContent";
 import { BasicWeather } from "@/types";
@@ -9,11 +10,16 @@ interface ClickableWeatherCardProps extends Omit<BasicWeather, "id"> {
 const ClickableWeatherCard = (
   props: ClickableWeatherCardProps
 ): JSX.Element => {
-  const { url, ...weatherCard } = props;
+  const { name, url, ...weatherCard } = props;
 
+  const title = (
+    <Typography gutterBottom variant="h5" component="div">
+      {name}
+    </Typography>
+  );
   return (
     <LinkCard key={url} url={url}>
-      <BasicWeatherCardContent {...weatherCard} />
+      <BasicWeatherCardContent {...weatherCard} title={title} />
     </LinkCard>
   );
 };
