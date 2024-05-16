@@ -4,6 +4,8 @@ import {
   BasicWeather,
   BasicWeatherDTO,
   DetailedWeather,
+  DetailedWeatherDTO,
+  ForecastWeather,
 } from "@/types";
 import {
   formatBasicWeather,
@@ -57,11 +59,11 @@ class WeatherApi {
       const nextDay = createNextDateString(index);
       const url = `${baseUrl}/forecast.json?q=${cityId}&dt=${nextDay}`;
 
-      promises.push(HttpClient.get<any>(url, options));
+      promises.push(HttpClient.get<DetailedWeatherDTO>(url, options));
     }
 
     const details = await Promise.all(promises);
-    let formattedForecasts: BasicWeather[] = [];
+    let formattedForecasts: ForecastWeather[] = [];
     let formattedDetails = formatDetailedWeather(cityId, details[0]);
 
     details.forEach((detail) => {

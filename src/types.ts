@@ -70,11 +70,15 @@ interface BasicWeather {
   climateIcon: string;
 }
 
+interface ForecastWeather extends BasicWeather {
+  date: string;
+}
+
 interface DetailedWeather extends BasicWeather {
   pressure: string; //pressure in millibars pressure_mb
   precipitation: string; // precipitation in millimeters precip_mm
   feelsLike: string; //feels like in millimeters feelslike_c
-  forecast?: BasicWeather[];
+  forecast?: ForecastWeather[];
 }
 
 const exampeCityResult = {
@@ -94,4 +98,5 @@ export type {
   BasicWeatherDTO,
   SearchBoxOption,
   DetailedWeatherDTO,
+  ForecastWeather,
 };

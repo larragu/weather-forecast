@@ -49,7 +49,7 @@ const formatForecast = (
     const { avgtemp_c, avghumidity, maxwind_kph, condition } = day;
 
     return {
-      id: index.toString(),
+      id: date,
       name: "",
       date: date,
       temperature: `${avgtemp_c}° c`,
