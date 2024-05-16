@@ -19,8 +19,7 @@ interface BasicWeatherDTO {
     region: string;
   };
   current: {
-    temp_c: number; //Temperature
-    temp_f: number; //Temperature
+    temp_c: number; //Temperature in celcius
     condition: {
       text: string; //Climate Description
       icon: string; //Climate Icon
@@ -28,6 +27,36 @@ interface BasicWeatherDTO {
     wind_mph: number; //Wind Velocity
     wind_kph: number; //Wind Velocity
     humidity: number; //Humidity
+  };
+}
+
+interface DetailedWeatherDTO {
+  current: {
+    temp_c: number;
+    condition: {
+      text: string;
+      icon: string;
+    };
+    wind_kph: number;
+    pressure_mb: number;
+    precip_mm: number;
+    humidity: number;
+    feelslike_c: number;
+  };
+  forecast: {
+    forecastday: [
+      {
+        date: string;
+        day: {
+          avgtemp_c: number;
+          maxwind_kph: number;
+          avghumidity: number;
+          condition: {
+            icon: string;
+          };
+        };
+      }
+    ];
   };
 }
 
@@ -64,4 +93,5 @@ export type {
   DetailedWeather,
   BasicWeatherDTO,
   SearchBoxOption,
+  DetailedWeatherDTO,
 };

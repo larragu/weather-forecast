@@ -106,7 +106,7 @@ const exampleSelectedCity = {
 //   },
 // };
 
-const exampleDetailedCity = {
+const exampleDetailedCity: any = {
   location: {
     name: "Chicago",
     region: "Illinois",
