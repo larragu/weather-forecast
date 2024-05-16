@@ -31,7 +31,6 @@ const FavoriteCities = (): JSX.Element | null => {
       container
       rowSpacing={{ xs: 2, sm: 4 }}
       columnSpacing={{ sm: 2, md: 4 }}
-      justifyContent="center"
     >
       {favorites?.map((favorite) => {
         const { id, name, ...restFavorite } = favorite;

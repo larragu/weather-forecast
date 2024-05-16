@@ -12,7 +12,6 @@ const DailyForecast = ({ days }: { days: ForecastWeather[] }): JSX.Element => {
         container
         rowSpacing={{ xs: 2, sm: 4 }}
         columnSpacing={{ sm: 2, md: 4 }}
-        justifyContent="center"
       >
         {days?.map((day) => {
           const { id, ...restDay } = day;
