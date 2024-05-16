@@ -62,6 +62,37 @@ class WeatherApiMock {
 
     return results;
   };
+
+  static getFavorites = async (cityId: string) => {
+    const results = await new Promise<SelectedCity[]>((resolve) => {
+      setTimeout(() => {
+        const selectedCities = [
+          {
+            id: cityId,
+            name: exampleSelectedCity.location.name,
+            temperature: exampleSelectedCity.current.temp_c.toString(),
+            weatherDescription: exampleSelectedCity.current.condition.text,
+            humidity: exampleSelectedCity.current.humidity.toString(),
+            windVelocity: exampleSelectedCity.current.wind_kph.toString(),
+            climateIcon: exampleSelectedCity.current.condition.icon,
+          },
+          {
+            id: cityId + 1,
+            name: exampleSelectedCity.location.name,
+            temperature: exampleSelectedCity.current.temp_c.toString(),
+            weatherDescription: exampleSelectedCity.current.condition.text,
+            humidity: exampleSelectedCity.current.humidity.toString(),
+            windVelocity: exampleSelectedCity.current.wind_kph.toString(),
+            climateIcon: exampleSelectedCity.current.condition.icon,
+          },
+        ];
+
+        resolve(selectedCities);
+      }, LATENCY_MS);
+    });
+
+    return results;
+  };
 }
 
 export default WeatherApiMock;

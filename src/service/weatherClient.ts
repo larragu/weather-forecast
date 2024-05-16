@@ -32,4 +32,11 @@ const getDescriptiveWeather = async (
   return results;
 };
 
-export { getCities, getWeather, getDescriptiveWeather };
+const getFavorites = async (ids: string[]): Promise<SelectedCity[]> => {
+  const url = `/api/favorites?ids=${ids}`;
+  const results = await HttpClient.get<SelectedCity[]>(url);
+
+  return results;
+};
+
+export { getCities, getWeather, getDescriptiveWeather, getFavorites };
