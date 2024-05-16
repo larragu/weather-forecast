@@ -5,7 +5,6 @@ const DailyForecast = ({ days }: { days: any[] }) => {
   return (
     <Box justifyContent="center">
       <Typography
-        gutterBottom
         variant="h5"
         component="div"
         textAlign={{ xs: "center", sm: "left" }}

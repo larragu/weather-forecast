@@ -14,9 +14,7 @@ const DayForecast = (props: DayForecastProps) => {
   return (
     <Card>
       <CardContent>
-        <Typography gutterBottom variant="h5">
-          {formattedDate}
-        </Typography>
+        <Typography variant="h5">{formattedDate}</Typography>
         <BasicWeatherCardContent {...restProps} />
       </CardContent>
     </Card>

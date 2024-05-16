@@ -23,7 +23,7 @@ const BasicWeatherCardContent = (props: BasicWeatherCardContentProps) => {
       </Typography>
       {weatherDescription ? (
         <Typography variant="body2" color="text.secondary">
-          Climate Description: {weatherDescription}
+          Description: {weatherDescription}
         </Typography>
       ) : null}
       <Typography variant="body2" color="text.secondary">

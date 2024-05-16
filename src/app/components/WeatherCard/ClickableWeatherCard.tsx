@@ -13,7 +13,7 @@ const ClickableWeatherCard = (
   const { name, url, ...weatherCard } = props;
 
   const title = (
-    <Typography gutterBottom variant="h5" component="div">
+    <Typography variant="h5" component="div">
       {name}
     </Typography>
   );

@@ -5,7 +5,7 @@ import { LinkCard } from "../components/WeatherCard";
 import { getFavorites } from "@/service/weatherClient";
 import { useEffect, useState } from "react";
 import { BasicWeather } from "@/types";
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, Box, Grid } from "@mui/material";
 import BasicWeatherCardContent from "./WeatherCard/BasicWeatherCardContent";
 
 const FavoriteCities = (): JSX.Element | null => {
@@ -27,22 +27,35 @@ const FavoriteCities = (): JSX.Element | null => {
     return null;
   }
   return (
-    <Stack spacing={4}>
+    <Grid
+      container
+      rowSpacing={{ xs: 2, sm: 4 }}
+      columnSpacing={{ sm: 2, md: 4 }}
+    >
       {favorites?.map((favorite) => {
         const { id, name, ...restFavorite } = favorite;
 
         const title = (
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography
+            variant="h5"
+            fontSize={{ xs: 16, sm: 18 }}
+            component="div"
+            noWrap
+          >
             {name}
           </Typography>
         );
         return (
-          <LinkCard key={id} url={`/details/${id}`}>
-            <BasicWeatherCardContent {...restFavorite} title={title} />
-          </LinkCard>
+          <Grid key={id} item xs={12} sm={6} md={4} justifyContent="center">
+            <Box width={{ md: "275px" }}>
+              <LinkCard url={`/details/${id}`}>
+                <BasicWeatherCardContent {...restFavorite} title={title} />
+              </LinkCard>
+            </Box>
+          </Grid>
         );
       })}
-    </Stack>
+    </Grid>
   );
 };
 
