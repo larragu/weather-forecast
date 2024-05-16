@@ -25,7 +25,7 @@ const DailyForecast = ({ days }: { days: any[] }): JSX.Element => {
             md={3}
             justifyContent="center"
           >
-            <Box width={{ sm: "200px" }}>
+            <Box width={{ sm: "200px" }} margin="auto">
               <DayForecast {...day} />
             </Box>
           </Grid>
