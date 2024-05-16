@@ -1,7 +1,7 @@
 import { getDetailedWeather } from "@/service/weatherClient";
 import { DetailedWeatherCard } from "@/app/components/WeatherCard/";
 import DailyForecast from "@/app/components/DailyForecast";
-import { Typography, Stack } from "@mui/material";
+import { Typography, Stack, Box } from "@mui/material";
 
 const Details = async ({ params }: { params: { id: string } }) => {
   const { id } = params;

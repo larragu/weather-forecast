@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import DayForecast from "./WeatherCard/DayForecast";
 
 const DailyForecast = ({ days }: { days: any[] }) => {
@@ -11,13 +11,26 @@ const DailyForecast = ({ days }: { days: any[] }) => {
       >
         Forecast
       </Typography>
-      <Stack flexDirection={{ xs: "column", sm: "row" }}>
+      <Grid
+        container
+        rowSpacing={{ xs: 2, sm: 4 }}
+        columnSpacing={{ sm: 2, md: 4 }}
+      >
         {days?.map((day) => (
-          <Box paddingX={{ sm: 2 }} paddingY={{ xs: 2 }} key={day.date}>
-            <DayForecast {...day} />
-          </Box>
+          <Grid
+            key={day.date}
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            justifyContent="center"
+          >
+            <Box width={{ sm: "200px" }}>
+              <DayForecast {...day} />
+            </Box>
+          </Grid>
         ))}
-      </Stack>
+      </Grid>
     </Box>
   );
 };

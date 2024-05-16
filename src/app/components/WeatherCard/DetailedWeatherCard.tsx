@@ -22,7 +22,7 @@ const DetailedWeatherCard = (props: DetailedWeatherCardProps) => {
   return (
     <Card>
       <CardContent>
-        <Box display="flex" justifyContent="space-between">
+        <Box display="flex" justifyContent="space-between" alignItems="center">
           <Typography variant="h5">Feels like {feelsLike}</Typography>
           {showFavoriteButton ? (
             <Box display="flex" justifyContent="flex-end">
