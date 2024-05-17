@@ -47,7 +47,7 @@ const FavoriteCities = (): JSX.Element | null => {
         );
         return (
           <Grid key={id} item xs={12} sm={6} md={4} justifyContent="center">
-            <Box margin="auto" display="flex" justifyContent="center">
+            <Box display="flex" justifyContent="center">
               <LinkCard url={`/details/${id}`} width={{ xs: 300, md: 275 }}>
                 <WeatherCardContent {...restFavorite} title={title} />
               </LinkCard>
