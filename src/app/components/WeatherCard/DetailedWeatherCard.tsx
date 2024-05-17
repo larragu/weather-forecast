@@ -20,7 +20,7 @@ const DetailedWeatherCard = (props: DetailedWeatherCardProps): JSX.Element => {
   } = props;
 
   return (
-    <Card sx={{ width: "300px" }}>
+    <Card sx={{ width: 300 }}>
       <CardContent>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Typography variant="h5">Feels like {feelsLike}</Typography>

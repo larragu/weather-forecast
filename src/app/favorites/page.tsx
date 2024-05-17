@@ -3,7 +3,7 @@ import FavoriteCities from "../components/FavoriteCities";
 
 const Favorites = async () => {
   return (
-    <Box justifyContent="center">
+    <Box justifyContent="center" flexDirection={"column"} alignItems="center">
       <Typography variant="h5" marginBottom={4} textAlign="center">
         Favorites
       </Typography>

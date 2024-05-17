@@ -12,7 +12,13 @@ const SelectedWeatherCard = (): JSX.Element | null => {
 
   const { id, ...restProps } = selectedCity;
 
-  return <ClickableWeatherCard {...restProps} url={`/details/${id}`} />;
+  return (
+    <ClickableWeatherCard
+      {...restProps}
+      url={`/details/${id}`}
+      width={{ xs: 300, md: 275 }}
+    />
+  );
 };
 
 export default SelectedWeatherCard;

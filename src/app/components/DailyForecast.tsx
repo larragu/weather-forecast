@@ -18,7 +18,9 @@ const DailyForecast = ({ days }: { days: ForecastWeather[] }): JSX.Element => {
 
           return (
             <Grid key={id} item xs={12} sm={6} md={3} justifyContent="center">
-              <DayForecast {...restDay} />
+              <Box margin="auto" display="flex" justifyContent="center">
+                <DayForecast {...restDay} />
+              </Box>
             </Grid>
           );
         })}

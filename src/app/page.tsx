@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { SelectedWeatherCard } from "./components/WeatherCard";
 
 export default function Home() {
@@ -7,7 +7,9 @@ export default function Home() {
       <Typography variant="h5" marginBottom={4}>
         Welcome!
       </Typography>
-      <SelectedWeatherCard />
+      <Box display="flex" justifyContent="center">
+        <SelectedWeatherCard />
+      </Box>
     </>
   );
 }
