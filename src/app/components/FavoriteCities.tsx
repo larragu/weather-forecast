@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { BasicWeather } from "@/types";
 import { Typography, Box, Grid, LinearProgress } from "@mui/material";
 import { WeatherCardContent } from "./WeatherCard";
+import Loading from "../loading";
 
 const FavoriteCities = (): JSX.Element | null => {
   const { localStorageFavorites } = useLocalStorage();
@@ -29,7 +30,7 @@ const FavoriteCities = (): JSX.Element | null => {
     return null;
   }
   return isLoading ? (
-    <LinearProgress />
+    <Loading />
   ) : (
     <Grid
       container
