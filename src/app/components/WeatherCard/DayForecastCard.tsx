@@ -1,13 +1,13 @@
 import { BasicWeather } from "@/types";
 import { Card, CardContent, Typography } from "@mui/material";
-import { WeatherCardContent } from "./WeatherCard";
+import { WeatherCardContent } from ".";
 import { formatForecastDate } from "@/utils";
 
-interface DayForecastProps extends Omit<BasicWeather, "id"> {
+interface DayForecastCardProps extends Omit<BasicWeather, "id"> {
   date: string;
 }
 
-const DayForecast = (props: DayForecastProps): JSX.Element => {
+const DayForecastCard = (props: DayForecastCardProps): JSX.Element => {
   const { date: dateString, ...restProps } = props;
 
   const formattedDate = formatForecastDate(dateString);
@@ -21,4 +21,4 @@ const DayForecast = (props: DayForecastProps): JSX.Element => {
   );
 };
 
-export default DayForecast;
+export default DayForecastCard;
