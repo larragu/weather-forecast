@@ -14,7 +14,9 @@ const DayForecastCard = (props: DayForecastCardProps): JSX.Element => {
   return (
     <Card sx={{ width: { xs: 300, sm: 200 }, margin: "auto" }}>
       <CardContent>
-        <Typography variant="h5">{formattedDate}</Typography>
+        <Typography variant="h5" paddingBottom="1rem">
+          {formattedDate}
+        </Typography>
         <WeatherCardContent {...restProps} />
       </CardContent>
     </Card>
