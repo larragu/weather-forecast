@@ -8,6 +8,8 @@ import "./globals.css";
 import styles from "./page.module.css";
 import { WeatherProvider } from "@/store/useWeatherContext";
 import { Box } from "@mui/material";
+import { Suspense } from "react";
+import Loader from "./loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,7 +36,7 @@ export default function RootLayout({
                   padding={{ xs: 2, sm: 4 }}
                   className={styles.main}
                 >
-                  {children}
+                  <Suspense fallback={<Loader />}>{children}</Suspense>
                 </Box>
               </>
             </WeatherProvider>
