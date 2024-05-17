@@ -36,7 +36,7 @@ const FavoriteCities = (): JSX.Element | null => {
         const { id, name, ...restFavorite } = favorite;
 
         const title = (
-          <Typography variant="h5" fontSize={{ xs: 16, sm: 18 }} noWrap>
+          <Typography variant="h5" fontSize={{ xs: "1.5rem", sm: 18 }} noWrap>
             {name}
           </Typography>
         );

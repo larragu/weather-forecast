@@ -14,11 +14,7 @@ const ClickableWeatherCard = (
 ): JSX.Element => {
   const { name, width, url, ...weatherCard } = props;
 
-  const title = (
-    <Typography variant="h5" component="div">
-      {name}
-    </Typography>
-  );
+  const title = <Typography variant="h5">{name}</Typography>;
   return (
     <LinkCard key={url} url={url} width={width}>
       <WeatherCardContent {...weatherCard} title={title} />
