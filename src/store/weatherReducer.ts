@@ -44,7 +44,7 @@ export const weatherReducer = (
 
       return {
         ...state,
-        favorites: newFavorites,
+        favorites: !!newFavorites.length ? newFavorites : null,
       };
     }
     case ACTIONS.SET_FAVORITES: {

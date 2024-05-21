@@ -1,32 +1,34 @@
 "use client";
 
-import useLocalStorage from "@/hooks/useLocalStorage";
 import LinkCard from "./LinkCard";
 import { getFavorites } from "@/service/weatherClient";
 import { useEffect, useState } from "react";
 import { BasicWeather } from "@/types";
-import { Typography, Box, Grid, LinearProgress } from "@mui/material";
+import { Typography, Box, Grid } from "@mui/material";
 import { WeatherCardContent } from "./WeatherCard";
 import Loading from "../loading";
+import { useWeatherContext } from "@/store/useWeatherContext";
 
 const FavoriteCities = (): JSX.Element | null => {
-  const { localStorageFavorites } = useLocalStorage();
-  const [favorites, setFavorites] = useState<BasicWeather[]>([]);
+  const { favorites } = useWeatherContext();
+  const [favoriteCities, setFavoriteCities] = useState<BasicWeather[] | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (localStorageFavorites && localStorageFavorites.length > 0) {
+    if (favorites && favorites.length > 0) {
       const fetchData = async () => {
-        const result = await getFavorites(localStorageFavorites);
-        setFavorites(result);
+        const result = await getFavorites(favorites);
+        setFavoriteCities(result);
         setIsLoading(false);
       };
 
       fetchData();
     }
-  }, [localStorageFavorites]);
+  }, [favorites]);
 
-  if (!localStorageFavorites) {
+  if (!favorites) {
     return null;
   }
   return isLoading ? (
@@ -37,7 +39,7 @@ const FavoriteCities = (): JSX.Element | null => {
       rowSpacing={{ xs: 2, sm: 4 }}
       columnSpacing={{ sm: 2, md: 4 }}
     >
-      {favorites?.map((favorite) => {
+      {favoriteCities?.map((favorite) => {
         const { id, name, ...restFavorite } = favorite;
 
         const title = (

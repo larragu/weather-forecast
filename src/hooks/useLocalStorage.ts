@@ -1,39 +1,36 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { FAVORITES_KEY } from "@/constants";
-
 interface UseLocalStorageReturnProps {
-  setLocalStorageFavorites: (favorites: string[]) => void;
-  localStorageFavorites: string[] | null;
+  getLocalStorageData: <T>(key: string) => T | null;
+  setLocalStorageData: <T>(key: string, data: T) => void;
 }
 
+const localStorage = typeof window !== "undefined" ? window.localStorage : null;
+
 const useLocalStorage = (): UseLocalStorageReturnProps => {
-  const [favorites, setFavorites] = useState<string[] | null>(null);
+  const getData = <T>(key: string): T | null => {
+    let data = null;
+    if (localStorage) {
+      const savedData = localStorage.getItem(key);
+      data = savedData ? (JSON.parse(savedData) as T) : null;
+    }
 
-  useEffect(() => {
-    const savedFavorites = window.localStorage.getItem(FAVORITES_KEY);
-    const favorites = savedFavorites ? JSON.parse(savedFavorites) : [];
-    setFavorites(favorites);
-  }, []);
+    return data;
+  };
 
-  useEffect(() => {
-    if (favorites) {
-      if (favorites?.length > 0) {
-        window.localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+  const setData = <T>(key: string, data: T): void => {
+    if (localStorage) {
+      if (data) {
+        localStorage.setItem(key, JSON.stringify(data));
       } else {
-        window.localStorage.removeItem(FAVORITES_KEY);
+        localStorage.removeItem(key);
       }
     }
-  }, [JSON.stringify(favorites)]);
-
-  const setFavoritesHandler = (favorites: string[]) => {
-    setFavorites(favorites);
   };
 
   return {
-    setLocalStorageFavorites: setFavoritesHandler,
-    localStorageFavorites: favorites,
+    getLocalStorageData: getData,
+    setLocalStorageData: setData,
   };
 };
 

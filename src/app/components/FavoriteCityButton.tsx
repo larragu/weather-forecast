@@ -4,6 +4,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useWeatherContext } from "@/store/useWeatherContext";
 import { IconButton } from "@mui/material";
+import { useEffect, useState } from "react";
 
 interface FavoriteCityProps {
   id: string;

@@ -4,12 +4,14 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import { ACTIONS, initialState, weatherReducer } from "@/store/weatherReducer";
 import { BasicWeather } from "@/types";
 import useLocalStorage from "@/hooks/useLocalStorage";
+import { FAVORITES_KEY } from "@/constants";
 
 interface WeatherContextProps {
   setSelectedCity: (selectedCity: BasicWeather) => void;
   selectedCity: BasicWeather | null;
   toggleFavorite: (cityId: string) => void;
   favorites: string[] | null;
+  setFavorites: (favorites: string[]) => void;
 }
 
 interface WeatherProviderProps {
@@ -29,22 +31,27 @@ export const useWeatherContext = () => {
 };
 
 export const WeatherProvider = ({ children }: WeatherProviderProps) => {
-  const { setLocalStorageFavorites, localStorageFavorites } = useLocalStorage();
-
+  const { getLocalStorageData, setLocalStorageData } = useLocalStorage();
   const updatedInitialState = {
     ...initialState,
-    favorites: localStorageFavorites,
+    favorites: null,
   };
+
   const [state, dispatch] = useReducer(weatherReducer, updatedInitialState);
-  useEffect(() => {
-    if (state.favorites) {
-      setLocalStorageFavorites(state.favorites);
-    }
-  }, [JSON.stringify(state.favorites)]);
 
   useEffect(() => {
-    setFavorites(localStorageFavorites);
-  }, [JSON.stringify(localStorageFavorites)]);
+    const storedFavorites = getLocalStorageData<string[]>(FAVORITES_KEY);
+    if (storedFavorites) {
+      setFavorites(storedFavorites);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (state.favorites) {
+      const newFavorites = !!state.favorites.length ? state.favorites : null;
+      setLocalStorageData(FAVORITES_KEY, newFavorites);
+    }
+  }, [state.favorites]);
 
   const setSelectedCity = (selectedCity: BasicWeather): void => {
     dispatch({ type: ACTIONS.SET_SELECTED_CITY, payload: selectedCity });
@@ -65,6 +72,7 @@ export const WeatherProvider = ({ children }: WeatherProviderProps) => {
         selectedCity: state.selectedCity,
         toggleFavorite,
         favorites: state.favorites,
+        setFavorites,
       }}
     >
       {children}
