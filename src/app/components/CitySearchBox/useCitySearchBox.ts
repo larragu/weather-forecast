@@ -35,7 +35,7 @@ const useCitySearchBox = ({
     getSearchResults,
   });
 
-  const cityInputHandler = (_event: React.SyntheticEvent, newValue: any) => {
+  const cityInputHandler = (_event: React.SyntheticEvent, newValue: string) => {
     setSearchValueHandler(newValue);
     debouncedLoadData(newValue);
   };
