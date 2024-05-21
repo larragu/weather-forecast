@@ -5,8 +5,9 @@ import { SearchBoxOption } from "@/types";
 interface UseSearchBoxReturnProps {
   searchValue: string | null;
   debouncedLoadData: (searchValue: string) => void;
-  setSearchValueHandler: (newValue: string) => void;
+  setSearchValue: (newValue: string) => void;
   searchResults: SearchBoxOption[];
+  resetSearchResults: () => void;
 }
 
 interface UseSearchBoxProps {
@@ -43,11 +44,16 @@ const useSearchBox = ({
     setSearchValue(newValue);
   };
 
+  const resetSearchResultsHandler = () => {
+    setSearchResults([]);
+  };
+
   return {
     searchValue,
     debouncedLoadData,
-    setSearchValueHandler,
+    setSearchValue: setSearchValueHandler,
     searchResults,
+    resetSearchResults: resetSearchResultsHandler,
   };
 };
 

@@ -1,11 +1,13 @@
 import { getCities, getWeather } from "../../../service/weatherClient";
 import useSearchBox from "../SearchBox/useSearchBox";
-import { BasicWeather } from "@/types";
-import { SearchBoxOption } from "@/types";
+import { BasicWeather, SearchBoxOption } from "@/types";
 
 interface UseCitySearchBoxReturnProps {
-  cityInputHandler: (_event: React.SyntheticEvent, newValue: any) => void;
-  selectCityHandler: (_event: React.SyntheticEvent, newValue: any) => void;
+  cityInputHandler: (_event: React.SyntheticEvent, newValue: string) => void;
+  selectCityHandler: (
+    _event: React.SyntheticEvent,
+    newValue: SearchBoxOption
+  ) => void;
   searchResults: SearchBoxOption[];
   searchValue: string | null;
 }
@@ -28,15 +30,16 @@ const useCitySearchBox = ({
 }: UseCitySearchBoxProps): UseCitySearchBoxReturnProps => {
   const {
     debouncedLoadData,
-    setSearchValueHandler,
+    setSearchValue,
     searchResults,
+    resetSearchResults,
     searchValue,
   } = useSearchBox({
     getSearchResults,
   });
 
   const cityInputHandler = (_event: React.SyntheticEvent, newValue: string) => {
-    setSearchValueHandler(newValue);
+    setSearchValue(newValue);
     debouncedLoadData(newValue);
   };
 
@@ -46,6 +49,8 @@ const useCitySearchBox = ({
   ) => {
     if (newValue?.label) {
       getWeather(newValue.label).then((city) => {
+        setSearchValue("");
+        resetSearchResults();
         onSelectCity(city);
       });
     }

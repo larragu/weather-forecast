@@ -33,6 +33,12 @@ const SearchBox = ({
           {...params}
           InputProps={{
             ...params.InputProps,
+            onKeyDown: (e) => {
+              if (e.key === "Enter") {
+                e.stopPropagation();
+                onSearchBoxChange(e, { label: e.currentTarget.value });
+              }
+            },
             startAdornment: (
               <InputAdornment position="start">
                 <SearchIcon />
