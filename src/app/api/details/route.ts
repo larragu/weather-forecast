@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import { FORECAST_DAYS } from "@/constants";
 import WeatherApi from "@/service/WeatherApi";
 
@@ -7,5 +8,5 @@ export async function GET(request: Request) {
 
   const result = await WeatherApi.getDetailedWeather(id, FORECAST_DAYS);
 
-  return Response.json(result);
+  return NextResponse.json(result);
 }

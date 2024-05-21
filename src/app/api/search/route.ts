@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import WeatherApi from "@/service/WeatherApi";
 
 export async function GET(request: Request) {
@@ -6,5 +7,5 @@ export async function GET(request: Request) {
 
   const results = await WeatherApi.getCities(searchTerm);
 
-  return Response.json(results);
+  return NextResponse.json(results);
 }
