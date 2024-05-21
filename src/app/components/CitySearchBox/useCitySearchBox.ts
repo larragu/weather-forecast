@@ -40,7 +40,10 @@ const useCitySearchBox = ({
     debouncedLoadData(newValue);
   };
 
-  const selectCityHandler = (_event: React.SyntheticEvent, newValue: any) => {
+  const selectCityHandler = (
+    _event: React.SyntheticEvent,
+    newValue: SearchBoxOption
+  ) => {
     if (newValue?.label) {
       getWeather(newValue.label).then((city) => {
         onSelectCity(city);
