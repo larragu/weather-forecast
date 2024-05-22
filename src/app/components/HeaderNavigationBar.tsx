@@ -1,16 +1,15 @@
-import { Box, List } from "@mui/material";
+import { Box, List, Paper } from "@mui/material";
 import CitySearchBox from "./CitySearchBox/CitySearchBox";
 import MenuItems from "./MenuItems";
 
 const HeaderNavigationBar = (): JSX.Element => {
   return (
-    <header>
+    <Paper component="header">
       <Box
         component="nav"
         display="flex"
         justifyContent="center"
         width="100%"
-        bgcolor="#022d50"
         paddingTop={3}
       >
         <Box width={{ xs: "100%", sm: "50%" }}>
@@ -26,7 +25,7 @@ const HeaderNavigationBar = (): JSX.Element => {
           </List>
         </Box>
       </Box>
-    </header>
+    </Paper>
   );
 };
 

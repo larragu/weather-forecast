@@ -13,7 +13,7 @@ const themeOptions: ThemeOptions = {
     },
     background: {
       default: "#121212",
-      paper: "#121212",
+      paper: "#022d50",
     },
   },
 };
