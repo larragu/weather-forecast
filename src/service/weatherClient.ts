@@ -17,9 +17,10 @@ const getWeather = async (cityName: string): Promise<BasicWeather> => {
 
 const getDetailedWeather = async (
   cityId: string,
+  currentDate: string,
   days: number = 3
 ): Promise<DetailedWeather> => {
-  const url = `/api/details/?id=${cityId}&days=${days}`;
+  const url = `/api/details/?id=${cityId}&current_date=${currentDate}&days=${days}`;
   const result = await HttpClient.get<DetailedWeather>(url);
 
   return result;

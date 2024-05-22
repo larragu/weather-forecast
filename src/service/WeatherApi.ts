@@ -12,7 +12,7 @@ import {
   formatDetailedWeather,
   formatForecast,
 } from "./weatherApi.utils";
-import { createNextDateString } from "@/utils";
+import { createFutureDateString } from "@/utils";
 
 const options = {
   method: "GET",
@@ -52,12 +52,14 @@ class WeatherApi {
 
   static getDetailedWeather = async (
     cityId: string,
-    days: number
+    currentDate: string,
+    days: number = 5
   ): Promise<Error | DetailedWeather> => {
     const promises = [];
     for (let index = 1; index <= days; index += 1) {
-      const nextDay = createNextDateString(index);
-      const url = `${baseUrl}/forecast.json?q=${cityId}&dt=${nextDay}`;
+      const futureDate = createFutureDateString(currentDate, index);
+
+      const url = `${baseUrl}/forecast.json?q=${cityId}&dt=${futureDate}`;
 
       promises.push(HttpClient.get<DetailedWeatherDTO>(url, options));
     }
