@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { ACTIONS, initialState, weatherReducer } from "@/store/weatherReducer";
 import { BasicWeather } from "@/types";
-import useLocalStorage from "@/hooks/useLocalStorage";
+import useLocalStorage from "@/useLocalStorage";
 import { FAVORITES_KEY } from "@/constants";
 
 interface WeatherContextProps {
