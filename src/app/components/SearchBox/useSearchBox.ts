@@ -11,7 +11,7 @@ interface UseSearchBoxReturnProps {
 }
 
 interface UseSearchBoxProps {
-  getSearchResults: (searchTerm: string) => Promise<SearchBoxOption[]>;
+  getSearchResults: (searchQuery: string) => Promise<SearchBoxOption[]>;
 }
 
 const DEBOUNCE_DELAY_MS = 400;

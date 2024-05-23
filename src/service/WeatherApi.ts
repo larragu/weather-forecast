@@ -26,10 +26,10 @@ const baseUrl = "https://weatherapi-com.p.rapidapi.com";
 
 class WeatherApi {
   static getCities = async (
-    searchTerm: string
+    searchQuery: string
   ): Promise<Error | CityResultDTO[]> => {
-    if (searchTerm) {
-      const url = `${baseUrl}/search.json?q=${searchTerm}`;
+    if (searchQuery) {
+      const url = `${baseUrl}/search.json?q=${searchQuery}`;
 
       const results = await HttpClient.get<CityResultDTO[]>(url, options);
 

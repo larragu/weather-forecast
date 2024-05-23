@@ -1,8 +1,8 @@
 import HttpClient from "./HttpClient";
 import { CityResultDTO, DetailedWeather, BasicWeather } from "@/types";
 
-const getCities = async (searchTerm: string): Promise<CityResultDTO[]> => {
-  const url = `/api/search?searchTerm=${searchTerm}`;
+const getCities = async (searchQuery: string): Promise<CityResultDTO[]> => {
+  const url = `/api/search?search_query=${searchQuery}`;
 
   const results = await HttpClient.get<CityResultDTO[]>(url);
   return results;

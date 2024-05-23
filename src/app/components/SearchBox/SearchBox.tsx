@@ -1,5 +1,6 @@
 "use client";
 
+import { KeyboardEvent } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import SearchIcon from "@mui/icons-material/Search";
@@ -33,10 +34,13 @@ const SearchBox = ({
           {...params}
           InputProps={{
             ...params.InputProps,
-            onKeyDown: (e) => {
-              if (e.key === "Enter") {
+            onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => {
+              const { key, target } = e;
+              const { value } = target as HTMLInputElement;
+
+              if (key === "Enter") {
                 e.stopPropagation();
-                onSearchBoxChange(e, { label: e.currentTarget.value });
+                onSearchBoxChange(e, { label: value });
               }
             },
             startAdornment: (

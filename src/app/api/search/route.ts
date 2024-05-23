@@ -3,9 +3,9 @@ import WeatherApi from "@/service/WeatherApi";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const searchTerm = searchParams.get("searchTerm") || "";
+  const searchQuery = searchParams.get("search_query") || "";
 
-  const results = await WeatherApi.getCities(searchTerm);
+  const results = await WeatherApi.getCities(searchQuery);
 
   return NextResponse.json(results);
 }

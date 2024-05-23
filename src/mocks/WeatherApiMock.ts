@@ -14,7 +14,7 @@ const LATENCY_MS = 300;
 let getCitiesDebounceTimer: ReturnType<typeof setTimeout> | null = null;
 
 class WeatherApiMock {
-  static getCities = async (searchTerm: string): Promise<CityResultDTO[]> => {
+  static getCities = async (searchQuery: string): Promise<CityResultDTO[]> => {
     if (getCitiesDebounceTimer !== null) {
       clearTimeout(getCitiesDebounceTimer);
     }
@@ -22,7 +22,7 @@ class WeatherApiMock {
     const results = await new Promise<CityResultDTO[]>((resolve) => {
       getCitiesDebounceTimer = setTimeout(() => {
         const cityList = cityResults.filter((city) =>
-          city.name.toLowerCase().includes(searchTerm.toLowerCase())
+          city.name.toLowerCase().includes(searchQuery.toLowerCase())
         );
 
         resolve(cityList);

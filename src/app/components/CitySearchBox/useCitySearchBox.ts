@@ -16,8 +16,8 @@ interface UseCitySearchBoxProps {
   onSelectCity: (selectedCity: BasicWeather) => void;
 }
 
-const getSearchResults = async (searchTerm: string) => {
-  const cities = await getCities(searchTerm);
+const getSearchResults = async (searchQuery: string) => {
+  const cities = await getCities(searchQuery);
   const formattedCities = cities?.map((city) => ({
     id: `${city.lat}, ${city.lon}`,
     label: city.name,
