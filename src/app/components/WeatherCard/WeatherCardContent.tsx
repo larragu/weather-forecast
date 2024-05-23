@@ -21,7 +21,7 @@ const WeatherCardContent = (
 
   return (
     <>
-      {title ? title : null}
+      {title}
       <Typography variant="body2" color="text.secondary">
         Temperature: {temperature}
       </Typography>
