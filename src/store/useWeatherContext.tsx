@@ -46,12 +46,12 @@ export const WeatherProvider = ({ children }: WeatherProviderProps) => {
     }
   }, []);
 
+  const { selectedCity, favorites } = state;
+
   useEffect(() => {
-    if (state.favorites) {
-      const newFavorites = !!state.favorites.length ? state.favorites : null;
-      setLocalStorageData(FAVORITES_KEY, newFavorites);
-    }
-  }, [state.favorites]);
+    const newFavorites = !!favorites?.length ? favorites : null;
+    setLocalStorageData(FAVORITES_KEY, newFavorites);
+  }, [favorites]);
 
   const setSelectedCity = (selectedCity: BasicWeather): void => {
     dispatch({ type: ACTIONS.SET_SELECTED_CITY, payload: selectedCity });
@@ -69,9 +69,9 @@ export const WeatherProvider = ({ children }: WeatherProviderProps) => {
     <WeatherContext.Provider
       value={{
         setSelectedCity,
-        selectedCity: state.selectedCity,
+        selectedCity,
         toggleFavorite,
-        favorites: state.favorites,
+        favorites,
         setFavorites,
       }}
     >

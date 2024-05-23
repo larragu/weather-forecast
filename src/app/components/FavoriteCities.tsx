@@ -4,7 +4,7 @@ import LinkCard from "./LinkCard";
 import { getFavorites } from "@/service/weatherClient";
 import { useEffect, useState } from "react";
 import { BasicWeather } from "@/types";
-import { Typography, Box, Grid } from "@mui/material";
+import { Typography, Box, Grid, Container } from "@mui/material";
 import { WeatherCardContent } from "./WeatherCard";
 import Loading from "../loading";
 import { useWeatherContext } from "@/store/useWeatherContext";
@@ -25,15 +25,16 @@ const FavoriteCities = (): JSX.Element | null => {
       };
 
       fetchData();
+    } else {
+      setIsLoading(false);
     }
   }, [favorites]);
 
-  if (!favorites) {
-    return null;
+  if (isLoading) {
+    return <Loading />;
   }
-  return isLoading ? (
-    <Loading />
-  ) : (
+
+  return !!favorites?.length ? (
     <Grid
       container
       rowSpacing={{ xs: 2, sm: 4 }}
@@ -63,6 +64,12 @@ const FavoriteCities = (): JSX.Element | null => {
         );
       })}
     </Grid>
+  ) : (
+    <Container>
+      <Typography variant="h6" textAlign="center">
+        No Favorites Found
+      </Typography>
+    </Container>
   );
 };
 
