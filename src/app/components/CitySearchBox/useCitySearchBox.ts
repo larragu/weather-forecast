@@ -27,10 +27,10 @@ const useCitySearchBox = ({
   onSubmitCity,
 }: UseCitySearchBoxProps): UseCitySearchBoxReturnProps => {
   const {
-    debouncedLoadData,
+    debounceLoadResults,
     setSearchValue,
     searchResults,
-    resetSearchResults,
+    onSubmit,
     searchValue,
   } = useSearchBox({
     getSearchResults,
@@ -39,7 +39,8 @@ const useCitySearchBox = ({
   const onChangeCity = (event: React.SyntheticEvent) => {
     const newValue = event ? (event.target as HTMLInputElement).value : "";
     setSearchValue(newValue);
-    debouncedLoadData(newValue);
+
+    debounceLoadResults(newValue);
   };
 
   const submitCityHandler = (event: SyntheticEvent) => {
@@ -47,8 +48,7 @@ const useCitySearchBox = ({
 
     if (value) {
       getWeather(value).then((city) => {
-        setSearchValue("");
-        resetSearchResults();
+        onSubmit();
         onSubmitCity(city);
       });
     }

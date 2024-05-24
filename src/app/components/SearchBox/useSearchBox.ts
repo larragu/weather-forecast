@@ -1,13 +1,12 @@
-import { debounce } from "@mui/material";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { SearchBoxOption } from "@/types";
 
 interface UseSearchBoxReturnProps {
   searchValue: string | null;
-  debouncedLoadData: (searchValue: string) => void;
+  debounceLoadResults: (searchValue: string) => void;
   setSearchValue: (newValue: string) => void;
   searchResults: SearchBoxOption[];
-  resetSearchResults: () => void;
+  onSubmit: () => void;
 }
 
 interface UseSearchBoxProps {
@@ -22,38 +21,50 @@ const useSearchBox = ({
   const [searchValue, setSearchValue] = useState<string | null>("");
   const [debouncedValue, setDebouncedValue] = useState<string | null>("");
   const [searchResults, setSearchResults] = useState<SearchBoxOption[]>([]);
+  const timeoutIdRef = useRef<number | null>(null);
 
-  const debouncedLoadData = useCallback(
-    debounce((newValue) => {
-      setDebouncedValue(newValue);
-    }, DEBOUNCE_DELAY_MS),
-    []
-  );
+  const debounceLoadResults = (newSearchValue: string) => {
+    if (timeoutIdRef.current !== null) {
+      clearTimeout(timeoutIdRef.current);
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setDebouncedValue(newSearchValue);
+    }, DEBOUNCE_DELAY_MS);
+    timeoutIdRef.current = timeoutId;
+  };
 
   useEffect(() => {
     if (debouncedValue) {
       const fetchData = async () => {
         const searchResults = await getSearchResults(debouncedValue);
-        setSearchResults(searchResults);
+
+        setSearchResults(searchValue ? searchResults : []);
       };
       fetchData();
     }
-  }, [debouncedValue]);
+  }, [debouncedValue, searchValue]);
 
   const setSearchValueHandler = (newValue: string) => {
     setSearchValue(newValue);
   };
 
-  const resetSearchResultsHandler = () => {
+  const onSubmitHandler = () => {
+    if (timeoutIdRef.current !== null) {
+      clearTimeout(timeoutIdRef.current);
+      timeoutIdRef.current = null;
+    }
+
+    setSearchValue("");
     setSearchResults([]);
   };
 
   return {
     searchValue,
-    debouncedLoadData,
+    debounceLoadResults,
     setSearchValue: setSearchValueHandler,
     searchResults,
-    resetSearchResults: resetSearchResultsHandler,
+    onSubmit: onSubmitHandler,
   };
 };
 
