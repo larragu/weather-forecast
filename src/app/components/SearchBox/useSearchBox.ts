@@ -43,7 +43,7 @@ const useSearchBox = ({
       };
       fetchData();
     }
-  }, [debouncedValue, searchValue]);
+  }, [debouncedValue, searchValue, getSearchResults]);
 
   const setSearchValueHandler = (newValue: string) => {
     setSearchValue(newValue);
