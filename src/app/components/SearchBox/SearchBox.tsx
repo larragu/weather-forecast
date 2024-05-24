@@ -1,6 +1,6 @@
 "use client";
 
-import { KeyboardEvent } from "react";
+import { KeyboardEvent, SyntheticEvent } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import SearchIcon from "@mui/icons-material/Search";
@@ -8,8 +8,8 @@ import { InputAdornment } from "@mui/material";
 import { SearchBoxOption } from "@/types";
 
 interface SearchBoxProps {
-  onSearchBoxInputChange: (_event: React.SyntheticEvent, newValue: any) => void;
-  onSearchBoxChange: (_event: React.SyntheticEvent, newValue: any) => void;
+  onChange: (event: SyntheticEvent) => void;
+  onSubmit: (event: SyntheticEvent) => void;
   searchResults: SearchBoxOption[];
   searchValue: string | null;
 }
@@ -17,30 +17,30 @@ interface SearchBoxProps {
 const SearchBox = ({
   searchValue,
   searchResults,
-  onSearchBoxChange,
-  onSearchBoxInputChange,
+  onSubmit,
+  onChange,
 }: SearchBoxProps): JSX.Element => {
   return (
     <Autocomplete
+      id="autocomplete"
       freeSolo
       options={searchResults.map((option) => ({
         id: option.id,
         label: option.label,
       }))}
-      onInputChange={onSearchBoxInputChange}
-      onChange={onSearchBoxChange}
+      onInputChange={onChange}
+      onChange={onSubmit}
       renderInput={(params) => (
         <TextField
           {...params}
+          id="searchbar"
           InputProps={{
             ...params.InputProps,
             onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => {
-              const { key, target } = e;
-              const { value } = target as HTMLInputElement;
-
-              if (key === "Enter") {
+              if (e.key === "Enter") {
                 e.stopPropagation();
-                onSearchBoxChange(e, { label: value });
+
+                onSubmit(e);
               }
             },
             startAdornment: (

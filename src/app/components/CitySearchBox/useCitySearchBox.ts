@@ -1,19 +1,17 @@
+import { SyntheticEvent } from "react";
 import { getCities, getWeather } from "../../../service/weatherClient";
 import useSearchBox from "../SearchBox/useSearchBox";
 import { BasicWeather, SearchBoxOption } from "@/types";
 
 interface UseCitySearchBoxReturnProps {
-  cityInputHandler: (_event: React.SyntheticEvent, newValue: string) => void;
-  selectCityHandler: (
-    _event: React.SyntheticEvent,
-    newValue: SearchBoxOption
-  ) => void;
+  onChange: (event: React.SyntheticEvent) => void;
+  onSubmit: (event: React.SyntheticEvent) => void;
   searchResults: SearchBoxOption[];
   searchValue: string | null;
 }
 
 interface UseCitySearchBoxProps {
-  onSelectCity: (selectedCity: BasicWeather) => void;
+  onSubmitCity: (selectedCity: BasicWeather) => void;
 }
 
 const getSearchResults = async (searchQuery: string) => {
@@ -26,7 +24,7 @@ const getSearchResults = async (searchQuery: string) => {
 };
 
 const useCitySearchBox = ({
-  onSelectCity,
+  onSubmitCity,
 }: UseCitySearchBoxProps): UseCitySearchBoxReturnProps => {
   const {
     debouncedLoadData,
@@ -38,27 +36,27 @@ const useCitySearchBox = ({
     getSearchResults,
   });
 
-  const cityInputHandler = (_event: React.SyntheticEvent, newValue: string) => {
+  const onChangeCity = (event: React.SyntheticEvent) => {
+    const newValue = event ? (event.target as HTMLInputElement).value : "";
     setSearchValue(newValue);
     debouncedLoadData(newValue);
   };
 
-  const selectCityHandler = (
-    _event: React.SyntheticEvent,
-    newValue: SearchBoxOption
-  ) => {
-    if (newValue?.label) {
-      getWeather(newValue.label).then((city) => {
+  const submitCityHandler = (event: SyntheticEvent) => {
+    const { value } = event.target as HTMLFormElement;
+
+    if (value) {
+      getWeather(value).then((city) => {
         setSearchValue("");
         resetSearchResults();
-        onSelectCity(city);
+        onSubmitCity(city);
       });
     }
   };
 
   return {
-    cityInputHandler,
-    selectCityHandler,
+    onChange: onChangeCity,
+    onSubmit: submitCityHandler,
     searchResults,
     searchValue,
   };

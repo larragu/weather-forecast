@@ -8,19 +8,21 @@ import { BasicWeather } from "@/types";
 const CitySearchBox = (): JSX.Element => {
   const router = useRouter();
   const { setSelectedCity } = useWeatherContext();
+
   const routeToHomePage = (selectedCity: BasicWeather) => {
     setSelectedCity(selectedCity);
     router.push("/");
   };
-  const { searchValue, searchResults, cityInputHandler, selectCityHandler } =
-    useCitySearchBox({ onSelectCity: routeToHomePage });
+  const { searchValue, searchResults, onChange, onSubmit } = useCitySearchBox({
+    onSubmitCity: routeToHomePage,
+  });
 
   return (
     <SearchBox
       searchResults={searchResults}
       searchValue={searchValue}
-      onSearchBoxInputChange={cityInputHandler}
-      onSearchBoxChange={selectCityHandler}
+      onChange={onChange}
+      onSubmit={onSubmit}
     />
   );
 };
