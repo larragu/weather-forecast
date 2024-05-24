@@ -14,8 +14,8 @@ interface UseCitySearchBoxProps {
   onSubmitCity: (selectedCity: BasicWeather) => void;
 }
 
-const getSearchResults = async (searchQuery: string) => {
-  const cities = await getCities(searchQuery);
+const getSearchResults = async (searchQuery: string, signal: AbortSignal) => {
+  const cities = await getCities(searchQuery, signal);
   const formattedCities = cities?.map((city) => ({
     id: `${city.lat}, ${city.lon}`,
     label: city.name,
@@ -38,8 +38,8 @@ const useCitySearchBox = ({
 
   const onChangeCity = (event: React.SyntheticEvent) => {
     const newValue = event ? (event.target as HTMLInputElement).value : "";
-    setSearchValue(newValue);
 
+    setSearchValue(newValue);
     debounceLoadResults(newValue);
   };
 

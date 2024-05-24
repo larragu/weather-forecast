@@ -10,7 +10,10 @@ interface UseSearchBoxReturnProps {
 }
 
 interface UseSearchBoxProps {
-  getSearchResults: (searchQuery: string) => Promise<SearchBoxOption[]>;
+  getSearchResults: (
+    searchQuery: string,
+    signal: AbortSignal
+  ) => Promise<SearchBoxOption[]>;
 }
 
 const DEBOUNCE_DELAY_MS = 400;
@@ -22,6 +25,7 @@ const useSearchBox = ({
   const [debouncedValue, setDebouncedValue] = useState<string | null>("");
   const [searchResults, setSearchResults] = useState<SearchBoxOption[]>([]);
   const timeoutIdRef = useRef<number | null>(null);
+  const controllerRef = useRef<AbortController | null>(null);
 
   const debounceLoadResults = (newSearchValue: string) => {
     if (timeoutIdRef.current !== null) {
@@ -37,26 +41,36 @@ const useSearchBox = ({
   useEffect(() => {
     if (debouncedValue) {
       const fetchData = async () => {
-        const searchResults = await getSearchResults(debouncedValue);
+        controllerRef.current = new AbortController();
+        const searchResults = await getSearchResults(
+          debouncedValue,
+          controllerRef.current.signal
+        );
 
-        setSearchResults(searchValue ? searchResults : []);
+        setSearchResults(searchResults);
       };
       fetchData();
     }
-  }, [debouncedValue, searchValue, getSearchResults]);
+  }, [debouncedValue, getSearchResults]);
 
   const setSearchValueHandler = (newValue: string) => {
     setSearchValue(newValue);
   };
 
-  const onSubmitHandler = () => {
+  const clearData = () => {
     if (timeoutIdRef.current !== null) {
       clearTimeout(timeoutIdRef.current);
       timeoutIdRef.current = null;
     }
-
     setSearchValue("");
+    setDebouncedValue("");
     setSearchResults([]);
+  };
+
+  const onSubmitHandler = () => {
+    clearData();
+    const reason = new DOMException("Fetch aborted", "AbortError");
+    controllerRef.current?.abort(reason);
   };
 
   return {
