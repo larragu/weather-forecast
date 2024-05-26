@@ -15,12 +15,21 @@ interface UseCitySearchBoxProps {
 }
 
 const getSearchResults = async (searchQuery: string, signal: AbortSignal) => {
-  const cities = await getCities(searchQuery, signal);
-  const formattedCities = cities?.map((city) => ({
-    id: `${city.lat}, ${city.lon}`,
-    label: city.name,
-  }));
-  return formattedCities;
+  try {
+    const results = await getCities(searchQuery, signal);
+
+    const formattedCities = results.map((city) => ({
+      id: `${city.lat}, ${city.lon}`,
+      label: city.name,
+    }));
+    return formattedCities;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+  } finally {
+    return [];
+  }
 };
 
 const useCitySearchBox = ({

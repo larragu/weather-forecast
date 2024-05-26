@@ -25,24 +25,25 @@ const options = {
 const baseUrl = "https://weatherapi-com.p.rapidapi.com";
 
 class WeatherApi {
-  static getCities = async (
-    searchQuery: string
-  ): Promise<Error | CityResultDTO[]> => {
+  static getCities = async (searchQuery: string): Promise<CityResultDTO[]> => {
     if (searchQuery) {
-      const url = `${baseUrl}/search.json?q=${searchQuery}`;
+      try {
+        const url = `${baseUrl}/search.json?q=${searchQuery}`;
 
-      const results = await HttpClient.get<CityResultDTO[]>(url, options);
+        const results = await HttpClient.get<CityResultDTO[]>(url, options);
 
-      return results.map((result) => ({
-        ...result,
-        name: `${result.name}, ${result.region}`,
-      }));
+        return results.map((result) => ({
+          ...result,
+          name: `${result.name}, ${result.region}`,
+        }));
+      } catch (error) {
+        throw new Error("Failed to fetch cities");
+      }
     }
-
     return [];
   };
 
-  static getWeather = async (cityId: string): Promise<Error | BasicWeather> => {
+  static getWeather = async (cityId: string): Promise<BasicWeather> => {
     const url = `${baseUrl}/current.json?q=${cityId}`;
     const result = await HttpClient.get<BasicWeatherDTO>(url, options);
 
@@ -54,7 +55,7 @@ class WeatherApi {
     cityId: string,
     currentDate: string,
     days: number = 5
-  ): Promise<Error | DetailedWeather> => {
+  ): Promise<DetailedWeather> => {
     const promises = [];
     for (let index = 1; index <= days; index += 1) {
       const futureDate = createFutureDateString(currentDate, index);
@@ -83,9 +84,7 @@ class WeatherApi {
     return detailedWeather;
   };
 
-  static getFavorites = async (
-    cityIds: string[]
-  ): Promise<(Error | BasicWeather)[]> => {
+  static getFavorites = async (cityIds: string[]): Promise<BasicWeather[]> => {
     const promises = cityIds.map((cityId) => this.getWeather(cityId));
 
     const results = await Promise.all(promises);

@@ -42,6 +42,7 @@ const useSearchBox = ({
     if (debouncedValue) {
       const fetchData = async () => {
         controllerRef.current = new AbortController();
+
         const searchResults = await getSearchResults(
           debouncedValue,
           controllerRef.current.signal
@@ -49,6 +50,7 @@ const useSearchBox = ({
 
         setSearchResults(searchResults);
       };
+
       fetchData();
     }
   }, [debouncedValue, getSearchResults]);
