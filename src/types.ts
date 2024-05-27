@@ -13,6 +13,8 @@ interface CityResultDTO {
   url: string;
 }
 
+interface CityResult extends Pick<CityResultDTO, "id" | "name"> {}
+
 interface BasicWeatherDTO {
   location: {
     name: string;
@@ -82,6 +84,7 @@ interface DetailedWeather extends BasicWeather {
 
 export type {
   CityResultDTO,
+  CityResult,
   BasicWeather,
   DetailedWeather,
   BasicWeatherDTO,

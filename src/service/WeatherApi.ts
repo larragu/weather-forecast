@@ -6,6 +6,7 @@ import {
   DetailedWeather,
   DetailedWeatherDTO,
   ForecastWeather,
+  CityResult,
 } from "@/types";
 import {
   formatBasicWeather,
@@ -25,16 +26,16 @@ const options = {
 const baseUrl = "https://weatherapi-com.p.rapidapi.com";
 
 class WeatherApi {
-  static getCities = async (searchQuery: string): Promise<CityResultDTO[]> => {
+  static getCities = async (searchQuery: string): Promise<CityResult[]> => {
     if (searchQuery) {
       try {
         const url = `${baseUrl}/search.json?q=${searchQuery}`;
 
         const results = await HttpClient.get<CityResultDTO[]>(url, options);
 
-        return results.map((result) => ({
-          ...result,
-          name: `${result.name}, ${result.region}`,
+        return results.map(({ id, name, region }) => ({
+          id,
+          name: `${name}, ${region}`,
         }));
       } catch (error) {
         throw new Error("Failed to fetch cities");
