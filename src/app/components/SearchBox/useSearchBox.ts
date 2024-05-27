@@ -71,7 +71,7 @@ const useSearchBox = ({
 
   const onSubmitHandler = () => {
     clearData();
-    const reason = new DOMException("Fetch aborted", "AbortError");
+    const reason = new DOMException();
     controllerRef.current?.abort(reason);
   };
 

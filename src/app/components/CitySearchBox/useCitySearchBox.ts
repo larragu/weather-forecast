@@ -31,9 +31,11 @@ const useCitySearchBox = ({
           id: `${city.lat}, ${city.lon}`,
           label: city.name,
         }));
+
         return formattedCities;
       } catch (error) {
-        if (error instanceof Error) {
+        if (error instanceof DOMException) {
+        } else if (error instanceof Error) {
           setError(error.message);
         }
         return [];
@@ -59,17 +61,25 @@ const useCitySearchBox = ({
   }, [error, toast]);
 
   const onChangeCity = (event: React.SyntheticEvent) => {
-    const newValue = event ? (event.target as HTMLInputElement).value : "";
+    if (event) {
+      const newValue =
+        (event.target as HTMLInputElement).value ||
+        (event.target as HTMLLIElement).textContent ||
+        "";
 
-    setSearchValue(newValue);
-    debounceLoadResults(newValue);
+      setSearchValue(newValue);
+      debounceLoadResults(newValue);
+    }
   };
 
   const submitCityHandler = (event: SyntheticEvent) => {
-    const { value } = event.target as HTMLFormElement;
+    const newValue =
+      (event.target as HTMLFormElement).value ||
+      (event.target as HTMLLIElement).textContent ||
+      "";
 
-    if (value) {
-      getWeather(value).then((city) => {
+    if (newValue) {
+      getWeather(newValue).then((city) => {
         onSubmit();
         onSubmitCity(city);
       });
