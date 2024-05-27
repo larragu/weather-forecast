@@ -10,6 +10,7 @@ import { WeatherProvider } from "@/store/useWeatherContext";
 import { Box } from "@mui/material";
 import { Suspense } from "react";
 import Loader from "./loading";
+import ToastProvider from "@/app/Toast/ToastProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,20 +29,23 @@ export default function RootLayout({
       <body className={inter.className}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
-            <WeatherProvider>
-              <>
-                <HeaderNavigationBar />
-                <Box
-                  component="main"
-                  padding={{ xs: 2, sm: 4 }}
-                  className={styles.main}
-                >
-                  <Suspense fallback={<Loader />}>{children}</Suspense>
-                </Box>
-              </>
-            </WeatherProvider>
+            <ToastProvider>
+              <WeatherProvider>
+                <>
+                  <HeaderNavigationBar />
+                  <Box
+                    component="main"
+                    padding={{ xs: 2, sm: 4 }}
+                    className={styles.main}
+                  >
+                    <Suspense fallback={<Loader />}>{children}</Suspense>
+                  </Box>
+                </>
+              </WeatherProvider>
+            </ToastProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
+        <div id="toast-root"></div>
       </body>
     </html>
   );

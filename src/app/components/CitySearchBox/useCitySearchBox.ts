@@ -1,7 +1,8 @@
-import { SyntheticEvent } from "react";
+import { SyntheticEvent, useCallback, useEffect, useState } from "react";
 import { getCities, getWeather } from "../../../service/weatherClient";
 import useSearchBox from "../SearchBox/useSearchBox";
 import { BasicWeather, SearchBoxOption } from "@/types";
+import { useToast } from "@/app/Toast/ToastProvider";
 
 interface UseCitySearchBoxReturnProps {
   onChange: (event: React.SyntheticEvent) => void;
@@ -14,27 +15,33 @@ interface UseCitySearchBoxProps {
   onSubmitCity: (selectedCity: BasicWeather) => void;
 }
 
-const getSearchResults = async (searchQuery: string, signal: AbortSignal) => {
-  try {
-    const results = await getCities(searchQuery, signal);
-
-    const formattedCities = results.map((city) => ({
-      id: `${city.lat}, ${city.lon}`,
-      label: city.name,
-    }));
-    return formattedCities;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    }
-  } finally {
-    return [];
-  }
-};
-
 const useCitySearchBox = ({
   onSubmitCity,
 }: UseCitySearchBoxProps): UseCitySearchBoxReturnProps => {
+  const [error, setError] = useState<string>();
+  const toast = useToast();
+
+  const getSearchResults = useCallback(
+    async (searchQuery: string, signal: AbortSignal) => {
+      setError("");
+      try {
+        const results = await getCities(searchQuery, signal);
+
+        const formattedCities = results.map((city) => ({
+          id: `${city.lat}, ${city.lon}`,
+          label: city.name,
+        }));
+        return formattedCities;
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        }
+        return [];
+      }
+    },
+    []
+  );
+
   const {
     debounceLoadResults,
     setSearchValue,
@@ -44,6 +51,12 @@ const useCitySearchBox = ({
   } = useSearchBox({
     getSearchResults,
   });
+
+  useEffect(() => {
+    if (error) {
+      toast({ message: error, status: "error" });
+    }
+  }, [error, toast]);
 
   const onChangeCity = (event: React.SyntheticEvent) => {
     const newValue = event ? (event.target as HTMLInputElement).value : "";

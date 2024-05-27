@@ -10,8 +10,11 @@ const getCities = async (
     const results = await HttpClient.get<CityResultDTO[]>(url, { signal });
     return results;
   } catch (error) {
-    throw new Error(error as string);
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
   }
+  return [];
 };
 
 const getWeather = async (cityName: string): Promise<BasicWeather> => {
