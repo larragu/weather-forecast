@@ -1,5 +1,5 @@
 interface SearchBoxOption {
-  id: string;
+  value: string;
   label: string;
 }
 

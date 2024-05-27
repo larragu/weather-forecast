@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { SearchBoxOption } from "@/types";
 
 interface UseSearchBoxReturnProps {
-  searchValue: string | null;
+  searchValue: string;
   debounceLoadResults: (searchValue: string) => void;
   setSearchValue: (newValue: string) => void;
   searchResults: SearchBoxOption[];
@@ -21,13 +21,13 @@ const DEBOUNCE_DELAY_MS = 400;
 const useSearchBox = ({
   getSearchResults,
 }: UseSearchBoxProps): UseSearchBoxReturnProps => {
-  const [searchValue, setSearchValue] = useState<string | null>("");
-  const [debouncedValue, setDebouncedValue] = useState<string | null>("");
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [debouncedValue, setDebouncedValue] = useState<string>("");
   const [searchResults, setSearchResults] = useState<SearchBoxOption[]>([]);
   const timeoutIdRef = useRef<number | null>(null);
   const controllerRef = useRef<AbortController | null>(null);
 
-  const debounceLoadResults = (newSearchValue: string) => {
+  const debounceLoadResults = (newSearchValue: string): void => {
     if (timeoutIdRef.current !== null) {
       clearTimeout(timeoutIdRef.current);
     }
@@ -55,11 +55,11 @@ const useSearchBox = ({
     }
   }, [debouncedValue, getSearchResults]);
 
-  const setSearchValueHandler = (newValue: string) => {
+  const setSearchValueHandler = (newValue: string): void => {
     setSearchValue(newValue);
   };
 
-  const clearData = () => {
+  const clearData = (): void => {
     if (timeoutIdRef.current !== null) {
       clearTimeout(timeoutIdRef.current);
       timeoutIdRef.current = null;
@@ -69,7 +69,7 @@ const useSearchBox = ({
     setSearchResults([]);
   };
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = (): void => {
     clearData();
     const reason = new DOMException();
     controllerRef.current?.abort(reason);

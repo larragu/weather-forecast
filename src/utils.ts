@@ -1,3 +1,5 @@
+import { SearchBoxOption } from "./types";
+
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 const formatForecastDate = (dateString: string): string => {
@@ -47,11 +49,14 @@ const createFutureDateString = (
   return futureDateString;
 };
 
-getCurrentLocalDate;
+const getOptionLabel = (option: SearchBoxOption | string): string => {
+  return typeof option === "string" ? option : option.label;
+};
 
 export {
   formatForecastDate,
   createFutureDateString,
   formatDate,
   getCurrentLocalDate,
+  getOptionLabel,
 };

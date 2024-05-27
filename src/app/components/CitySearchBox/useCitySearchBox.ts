@@ -3,12 +3,16 @@ import { getCities, getWeather } from "../../../service/weatherClient";
 import useSearchBox from "../SearchBox/useSearchBox";
 import { BasicWeather, SearchBoxOption } from "@/types";
 import { useToast } from "@/app/Toast/ToastProvider";
+import { getOptionLabel } from "@/utils";
 
 interface UseCitySearchBoxReturnProps {
-  onChange: (event: React.SyntheticEvent) => void;
-  onSubmit: (event: React.SyntheticEvent) => void;
+  onChange: (event: SyntheticEvent, value: string) => void;
+  onSubmit: (
+    event: SyntheticEvent,
+    value: SearchBoxOption | string | null
+  ) => void;
   searchResults: SearchBoxOption[];
-  searchValue: string | null;
+  searchValue: string;
 }
 
 interface UseCitySearchBoxProps {
@@ -22,14 +26,17 @@ const useCitySearchBox = ({
   const toast = useToast();
 
   const getSearchResults = useCallback(
-    async (searchQuery: string, signal: AbortSignal) => {
+    async (
+      searchQuery: string,
+      signal: AbortSignal
+    ): Promise<SearchBoxOption[]> => {
       setError("");
       try {
         const results = await getCities(searchQuery, signal);
 
-        const formattedCities = results.map((city) => ({
-          id: `${city.lat}, ${city.lon}`,
-          label: city.name,
+        const formattedCities = results.map(({ id, name }) => ({
+          value: String(id),
+          label: name,
         }));
 
         return formattedCities;
@@ -60,26 +67,19 @@ const useCitySearchBox = ({
     }
   }, [error, toast]);
 
-  const onChangeCity = (event: React.SyntheticEvent) => {
-    if (event) {
-      const newValue =
-        (event.target as HTMLInputElement).value ||
-        (event.target as HTMLLIElement).textContent ||
-        "";
-
-      setSearchValue(newValue);
-      debounceLoadResults(newValue);
-    }
+  const changeCityHandler = (_event: SyntheticEvent, value: string) => {
+    setSearchValue(value);
+    debounceLoadResults(value);
   };
 
-  const submitCityHandler = (event: SyntheticEvent) => {
-    const newValue =
-      (event.target as HTMLFormElement).value ||
-      (event.target as HTMLLIElement).textContent ||
-      "";
+  const submitCityHandler = (
+    _event: SyntheticEvent,
+    value: SearchBoxOption | string | null
+  ) => {
+    if (value) {
+      const label = getOptionLabel(value);
 
-    if (newValue) {
-      getWeather(newValue).then((city) => {
+      getWeather(label).then((city) => {
         onSubmit();
         onSubmitCity(city);
       });
@@ -87,7 +87,7 @@ const useCitySearchBox = ({
   };
 
   return {
-    onChange: onChangeCity,
+    onChange: changeCityHandler,
     onSubmit: submitCityHandler,
     searchResults,
     searchValue,
