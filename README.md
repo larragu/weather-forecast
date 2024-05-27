@@ -16,14 +16,6 @@
 - Bookmark your favorite cities' weather for viewing later
 - 5-day weather forecast
 
-## Environment Variables
-
-Create a **.env.local** file in the root folder
-
-Variables
-**X_RapidAPI_Key=aa5ece6461msh40d1b62f7119395p1d5f5djsn5611ccae71ac**
-**X_RapidAPI_Host=weatherapi-com.p.rapidapi.com**
-
 ## Getting Started
 
 First, install the dependency packages:
