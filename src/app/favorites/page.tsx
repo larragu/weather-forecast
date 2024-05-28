@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import FavoriteCities from "../components/FavoriteCities";
+import { FavoriteCities } from "@/app/components";
 
 const Favorites = async () => {
   return (

@@ -1,36 +1,17 @@
 "use client";
 
-import { createContext, useContext, useEffect, useReducer } from "react";
-import { ACTIONS, initialState, weatherReducer } from "@/store/weatherReducer";
+import { FAVORITES_KEY } from "@/constants";
 import { BasicWeather } from "@/types";
 import useLocalStorage from "@/useLocalStorage";
-import { FAVORITES_KEY } from "@/constants";
-
-interface WeatherContextProps {
-  setSelectedCity: (selectedCity: BasicWeather) => void;
-  selectedCity: BasicWeather | null;
-  toggleFavorite: (cityId: string) => void;
-  favorites: string[] | null;
-  setFavorites: (favorites: string[]) => void;
-}
+import { useReducer, useEffect } from "react";
+import { initialState, weatherReducer, ACTIONS } from "./weatherReducer";
+import { WeatherContext } from "./useWeatherContext";
 
 interface WeatherProviderProps {
   children: React.ReactNode;
 }
 
-const WeatherContext = createContext<WeatherContextProps | null>(null);
-
-export const useWeatherContext = () => {
-  const context = useContext(WeatherContext);
-  if (!context) {
-    throw new Error(
-      "useWeatherContext has to be within WeatherContext.Provider"
-    );
-  }
-  return context;
-};
-
-export const WeatherProvider = ({ children }: WeatherProviderProps) => {
+const WeatherProvider = ({ children }: WeatherProviderProps) => {
   const { getLocalStorageData, setLocalStorageData } = useLocalStorage();
   const updatedInitialState = {
     ...initialState,
@@ -79,3 +60,5 @@ export const WeatherProvider = ({ children }: WeatherProviderProps) => {
     </WeatherContext.Provider>
   );
 };
+
+export default WeatherProvider;

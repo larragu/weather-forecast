@@ -1,4 +1,4 @@
-import WeatherDetails from "@/app/components/WeatherDetails";
+import { WeatherDetails } from "@/app/components";
 
 const Details = async ({ params }: { params: { id: string } }) => {
   const { id } = params;

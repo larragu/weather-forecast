@@ -1,8 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 import useCitySearchBox from "./useCitySearchBox";
-import { useWeatherContext } from "@/store/useWeatherContext";
-import SearchBox from "../SearchBox/SearchBox";
+import { useWeatherContext } from "@/store";
+import { SearchBox } from "../SearchBox";
 import { BasicWeather } from "@/types";
 
 const CitySearchBox = (): JSX.Element => {

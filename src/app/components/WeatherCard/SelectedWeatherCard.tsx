@@ -1,6 +1,6 @@
 "use client";
 
-import { useWeatherContext } from "../../../store/useWeatherContext";
+import { useWeatherContext } from "@/store";
 import { ClickableWeatherCard } from ".";
 
 const SelectedWeatherCard = (): JSX.Element | null => {

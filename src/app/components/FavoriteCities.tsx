@@ -7,7 +7,7 @@ import { BasicWeather } from "@/types";
 import { Typography, Box, Grid, Container } from "@mui/material";
 import { WeatherCardContent } from "./WeatherCard";
 import Loading from "../loading";
-import { useWeatherContext } from "@/store/useWeatherContext";
+import { useWeatherContext } from "@/store";
 
 const FavoriteCities = (): JSX.Element | null => {
   const { favorites } = useWeatherContext();

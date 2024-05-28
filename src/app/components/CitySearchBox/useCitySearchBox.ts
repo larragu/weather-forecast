@@ -1,8 +1,8 @@
 import { SyntheticEvent, useCallback, useEffect, useState } from "react";
 import { getCities, getWeather } from "../../../service/weatherClient";
-import useSearchBox from "../SearchBox/useSearchBox";
+import { useSearchBox } from "../SearchBox";
 import { BasicWeather, SearchBoxOption } from "@/types";
-import { useToast } from "@/app/Toast/ToastProvider";
+import { useToast } from "@/app/components/Toast";
 import { getOptionLabel } from "@/utils";
 
 interface UseCitySearchBoxReturnProps {

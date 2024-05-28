@@ -1,31 +1,24 @@
 "use client";
 
-import { createContext, useCallback, useContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import ReactDOM from "react-dom";
 import ToastComponent from "./Toast";
 import { ToastProps } from "./Toast.types";
 
-interface WeatherProviderProps {
+interface ToastProviderProps {
   children: React.ReactNode;
 }
 
 type Toast = Omit<ToastProps, "onClose">;
+
 type ToastContextProps = (props: Toast) => void;
 
 const portalDiv =
   typeof window !== "undefined" ? document.getElementById("toast-root") : null;
 
-const ToastContext = createContext<ToastContextProps | null>(null);
+export const ToastContext = createContext<ToastContextProps | null>(null);
 
-export const useToast = () => {
-  const context = useContext(ToastContext);
-  if (!context) {
-    throw new Error("useToast has to be within ToastContext.Provider");
-  }
-  return context;
-};
-
-const ToastProvider = ({ children }: WeatherProviderProps) => {
+const ToastProvider = ({ children }: ToastProviderProps) => {
   const [toast, setToast] = useState<Toast | null>(null);
 
   const showToast = useCallback(({ message, status }: Toast) => {
