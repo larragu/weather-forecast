@@ -9,27 +9,49 @@ import { useEffect, useState } from "react";
 import { getDetailedWeather } from "@/service/weatherClient";
 import { FORECAST_DAYS } from "@/constants";
 import Loader from "../loading";
+import { useToast } from "./Toast";
 
 interface WeatherDetailsProps {
   cityId: string;
 }
 
-const WeatherDetails = ({ cityId }: WeatherDetailsProps) => {
+const WeatherDetails = ({
+  cityId,
+}: WeatherDetailsProps): JSX.Element | null => {
+  const toast = useToast();
   const [details, setDetails] = useState<DetailedWeather | null>(null);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     const localDateString = formatDate(getCurrentLocalDate());
     const fetchData = async () => {
-      const result = await getDetailedWeather(
-        cityId,
-        localDateString,
-        FORECAST_DAYS
-      );
-      setDetails(result);
+      try {
+        setError("");
+        const result = await getDetailedWeather(
+          cityId,
+          localDateString,
+          FORECAST_DAYS
+        );
+        setDetails(result);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        }
+      }
     };
 
     fetchData();
   }, [cityId]);
+
+  useEffect(() => {
+    if (error) {
+      toast({ message: error, status: "error" });
+    }
+  }, [error]);
+
+  if (error) {
+    return null;
+  }
 
   if (!details) {
     return <Loader />;

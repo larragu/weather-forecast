@@ -22,7 +22,7 @@ interface UseCitySearchBoxProps {
 const useCitySearchBox = ({
   onSubmitCity,
 }: UseCitySearchBoxProps): UseCitySearchBoxReturnProps => {
-  const [error, setError] = useState<string>();
+  const [error, setError] = useState<string>("");
   const toast = useToast();
 
   const getSearchResults = useCallback(
@@ -72,17 +72,24 @@ const useCitySearchBox = ({
     debounceLoadResults(value);
   };
 
-  const submitCityHandler = (
+  const submitCityHandler = async (
     _event: SyntheticEvent,
     value: SearchBoxOption | string | null
   ) => {
+    setError("");
     if (value) {
       const label = getOptionLabel(value);
-
-      getWeather(label).then((city) => {
-        onSubmit();
-        onSubmitCity(city);
-      });
+      try {
+        const weather = await getWeather(label);
+        if (weather) {
+          onSubmit();
+          onSubmitCity(weather);
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        }
+      }
     }
   };
 

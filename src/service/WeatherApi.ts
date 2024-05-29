@@ -46,10 +46,14 @@ class WeatherApi {
 
   static getWeather = async (cityId: string): Promise<BasicWeather> => {
     const url = `${baseUrl}/current.json?q=${cityId}`;
-    const result = await HttpClient.get<BasicWeatherDTO>(url, options);
+    try {
+      const result = await HttpClient.get<BasicWeatherDTO>(url, options);
 
-    const basicWeather = formatBasicWeather(result);
-    return basicWeather;
+      const basicWeather = formatBasicWeather(result);
+      return basicWeather;
+    } catch (error) {
+      throw new Error("Failed to fetch current weather");
+    }
   };
 
   static getDetailedWeather = async (
@@ -57,40 +61,49 @@ class WeatherApi {
     currentDate: string,
     days: number = 5
   ): Promise<DetailedWeather> => {
-    const promises = [];
-    for (let index = 1; index <= days; index += 1) {
-      const futureDate = createFutureDateString(currentDate, index);
+    try {
+      const promises = [];
 
-      const url = `${baseUrl}/forecast.json?q=${cityId}&dt=${futureDate}`;
+      for (let index = 1; index <= days; index += 1) {
+        const futureDate = createFutureDateString(currentDate, index);
 
-      promises.push(HttpClient.get<DetailedWeatherDTO>(url, options));
-    }
+        const url = `${baseUrl}/forecast.json?q=${cityId}&dt=${futureDate}`;
 
-    const details = await Promise.all(promises);
-    let formattedForecasts: ForecastWeather[] = [];
-    let formattedDetails = formatDetailedWeather(cityId, details[0]);
-
-    details.forEach((detail) => {
-      const newForecast = formatForecast(detail.forecast);
-      if (newForecast) {
-        formattedForecasts.push(newForecast[0]);
+        promises.push(HttpClient.get<DetailedWeatherDTO>(url, options));
       }
-    });
 
-    const detailedWeather = {
-      ...formattedDetails,
-      forecast: formattedForecasts,
-    };
+      const details = await Promise.all(promises);
+      let formattedForecasts: ForecastWeather[] = [];
+      let formattedDetails = formatDetailedWeather(cityId, details[0]);
 
-    return detailedWeather;
+      details.forEach((detail) => {
+        const newForecast = formatForecast(detail.forecast);
+        if (newForecast) {
+          formattedForecasts.push(newForecast[0]);
+        }
+      });
+
+      const detailedWeather = {
+        ...formattedDetails,
+        forecast: formattedForecasts,
+      };
+
+      return detailedWeather;
+    } catch (error) {
+      throw new Error("Failed to fetch detailed weather");
+    }
   };
 
   static getFavorites = async (cityIds: string[]): Promise<BasicWeather[]> => {
-    const promises = cityIds.map((cityId) => this.getWeather(cityId));
+    try {
+      const promises = cityIds.map((cityId) => this.getWeather(cityId));
 
-    const results = await Promise.all(promises);
+      const results = await Promise.all(promises);
 
-    return results;
+      return results;
+    } catch (error) {
+      throw new Error("Failed to retrieve favorites");
+    }
   };
 }
 

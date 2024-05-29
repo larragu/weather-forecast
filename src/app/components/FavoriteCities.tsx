@@ -1,15 +1,17 @@
 "use client";
 
-import LinkCard from "./LinkCard";
+import LinkCard from "@/app/components/LinkCard";
 import { getFavorites } from "@/service/weatherClient";
 import { useEffect, useState } from "react";
 import { BasicWeather } from "@/types";
 import { Typography, Box, Grid, Container } from "@mui/material";
-import { WeatherCardContent } from "./WeatherCard";
+import { WeatherCardContent } from "@/app/components/WeatherCard";
 import Loading from "../loading";
 import { useWeatherContext } from "@/store";
+import { useToast } from "@/app/components/Toast";
 
 const FavoriteCities = (): JSX.Element | null => {
+  const toast = useToast();
   const { favorites } = useWeatherContext();
   const [favoriteCities, setFavoriteCities] = useState<BasicWeather[] | null>(
     null
@@ -19,9 +21,17 @@ const FavoriteCities = (): JSX.Element | null => {
   useEffect(() => {
     if (favorites && favorites.length > 0) {
       const fetchData = async () => {
-        const result = await getFavorites(favorites);
-        setFavoriteCities(result);
-        setIsLoading(false);
+        try {
+          setIsLoading(true);
+          const result = await getFavorites(favorites);
+          setFavoriteCities(result);
+        } catch (error) {
+          if (error instanceof Error) {
+            toast({ message: error.message, status: "error" });
+          }
+        } finally {
+          setIsLoading(false);
+        }
       };
 
       fetchData();

@@ -10,7 +10,24 @@ export async function GET(request: Request) {
 
   let result = {};
   if (id && currentDate) {
-    result = await WeatherApi.getDetailedWeather(id, currentDate, Number(days));
+    try {
+      result = await WeatherApi.getDetailedWeather(
+        id,
+        currentDate,
+        Number(days)
+      );
+    } catch (error) {
+      if (error instanceof Error) {
+        return NextResponse.json(
+          {
+            message:
+              error.message ||
+              "An error occurred while fetching detailed weather",
+          },
+          { status: 500 }
+        );
+      }
+    }
   }
 
   return NextResponse.json(result);

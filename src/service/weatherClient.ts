@@ -5,16 +5,9 @@ const getCities = async (
   searchQuery: string,
   signal: AbortSignal
 ): Promise<CityResultDTO[]> => {
-  try {
-    const url = `/api/search?search_query=${searchQuery}`;
-    const results = await HttpClient.get<CityResultDTO[]>(url, { signal });
-    return results;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    }
-  }
-  return [];
+  const url = `/api/search?search_query=${searchQuery}`;
+  const results = await HttpClient.get<CityResultDTO[]>(url, { signal });
+  return results;
 };
 
 const getWeather = async (cityName: string): Promise<BasicWeather> => {
