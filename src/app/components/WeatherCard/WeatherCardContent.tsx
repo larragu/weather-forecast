@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import { BasicWeather } from "@/types";
+import Image from "next/image";
 
 interface BasicWeatherCardContentProps
   extends Omit<BasicWeather, "id" | "name"> {
@@ -13,7 +14,7 @@ const WeatherCardContent = (
     title,
     children,
     temperature,
-    weatherDescription,
+    weatherDescription = "",
     humidity,
     windVelocity,
     climateIcon,
@@ -38,7 +39,7 @@ const WeatherCardContent = (
       </Typography>
       {children}
       <Typography variant="body2" color="text.secondary">
-        <img
+        <Image
           src={climateIcon}
           alt={weatherDescription}
           width="50"
