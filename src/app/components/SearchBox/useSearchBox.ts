@@ -52,6 +52,13 @@ const useSearchBox = ({
       };
 
       fetchData();
+
+      return () => {
+        if (timeoutIdRef.current !== null) {
+          clearTimeout(timeoutIdRef.current);
+          timeoutIdRef.current = null;
+        }
+      };
     }
   }, [debouncedValue, getSearchResults]);
 
