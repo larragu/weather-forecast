@@ -1,9 +1,6 @@
 import {
-  CityResultDTO,
   BasicWeather,
-  BasicWeatherDTO,
   DetailedWeather,
-  DetailedWeatherDTO,
   ForecastWeather,
   CityResult,
 } from "@/types";
@@ -17,9 +14,7 @@ import weatherApiClient from "./weather.client";
 
 class WeatherService {
   async getCities(searchQuery: string): Promise<CityResult[]> {
-    const results = await weatherApiClient.getCities<CityResultDTO[]>(
-      searchQuery
-    );
+    const results = await weatherApiClient.getCities(searchQuery);
 
     return results.map(({ id, name, region }) => ({
       id,
@@ -28,7 +23,7 @@ class WeatherService {
   }
 
   async getWeather(cityId: string): Promise<BasicWeather> {
-    const result = await weatherApiClient.getWeather<BasicWeatherDTO>(cityId);
+    const result = await weatherApiClient.getWeather(cityId);
 
     const basicWeather = formatBasicWeather(result);
     return basicWeather;
@@ -44,12 +39,7 @@ class WeatherService {
     for (let index = 1; index <= days; index += 1) {
       const futureDate = createFutureDateString(currentDate, index);
 
-      promises.push(
-        weatherApiClient.getDetailedWeather<DetailedWeatherDTO>(
-          cityId,
-          futureDate
-        )
-      );
+      promises.push(weatherApiClient.getDetailedWeather(cityId, futureDate));
     }
 
     const details = await Promise.all(promises);

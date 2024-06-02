@@ -1,5 +1,6 @@
 import { weatherApiBasePath } from "@/config";
 import HttpClient from "./http.client";
+import { BasicWeatherDTO, CityResultDTO, DetailedWeatherDTO } from "@/types";
 
 const options = {
   method: "GET",
@@ -14,10 +15,10 @@ class WeatherApiClient {
     this.headers = { "X-RapidAPI-Key": apiKey, "X-RapidAPI-Host": apiHost };
   }
 
-  async getCities<T>(searchQuery: string): Promise<T> {
+  async getCities(searchQuery: string): Promise<CityResultDTO[]> {
     const url = `${this.basePath}/search.json?q=${searchQuery}`;
 
-    const response = await HttpClient.get<T>(url, {
+    const response = await HttpClient.get<CityResultDTO[]>(url, {
       ...options,
       headers: this.headers,
     });
@@ -25,10 +26,10 @@ class WeatherApiClient {
     return response;
   }
 
-  async getWeather<T>(cityId: string): Promise<T> {
+  async getWeather(cityId: string): Promise<BasicWeatherDTO> {
     const url = `${this.basePath}/current.json?q=${cityId}`;
 
-    const result = await HttpClient.get<T>(url, {
+    const result = await HttpClient.get<BasicWeatherDTO>(url, {
       ...options,
       headers: this.headers,
     });
@@ -36,10 +37,13 @@ class WeatherApiClient {
     return result;
   }
 
-  async getDetailedWeather<T>(cityId: string, futureDate: string): Promise<T> {
+  async getDetailedWeather(
+    cityId: string,
+    futureDate: string
+  ): Promise<DetailedWeatherDTO> {
     const url = `${this.basePath}/forecast.json?q=${cityId}&dt=${futureDate}`;
 
-    const result = HttpClient.get<T>(url, {
+    const result = HttpClient.get<DetailedWeatherDTO>(url, {
       ...options,
       headers: this.headers,
     });
