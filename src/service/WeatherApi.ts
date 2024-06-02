@@ -17,21 +17,24 @@ import { createFutureDateString } from "@/utils";
 
 const options = {
   method: "GET",
-  headers: {
-    "X-RapidAPI-Key": process.env.X_RapidAPI_Key,
-    "X-RapidAPI-Host": process.env.X_RapidAPI_Host,
-  },
 };
 
 const baseUrl = "https://weatherapi-com.p.rapidapi.com";
 
 class WeatherApi {
-  static getCities = async (searchQuery: string): Promise<CityResult[]> => {
+  headers: { "X-RapidAPI-Key": string; "X-RapidAPI-Host": string };
+  constructor(apiKey: string, apiHost: string) {
+    this.headers = { "X-RapidAPI-Key": apiKey, "X-RapidAPI-Host": apiHost };
+  }
+  async getCities(searchQuery: string): Promise<CityResult[]> {
     if (searchQuery) {
       try {
         const url = `${baseUrl}/search.json?q=${searchQuery}`;
 
-        const results = await HttpClient.get<CityResultDTO[]>(url, options);
+        const results = await HttpClient.get<CityResultDTO[]>(url, {
+          ...options,
+          ...this.headers,
+        });
 
         return results.map(({ id, name, region }) => ({
           id,
@@ -42,25 +45,28 @@ class WeatherApi {
       }
     }
     return [];
-  };
+  }
 
-  static getWeather = async (cityId: string): Promise<BasicWeather> => {
+  async getWeather(cityId: string): Promise<BasicWeather> {
     const url = `${baseUrl}/current.json?q=${cityId}`;
     try {
-      const result = await HttpClient.get<BasicWeatherDTO>(url, options);
+      const result = await HttpClient.get<BasicWeatherDTO>(url, {
+        ...options,
+        ...this.headers,
+      });
 
       const basicWeather = formatBasicWeather(result);
       return basicWeather;
     } catch (error) {
       throw new Error("Failed to fetch current weather");
     }
-  };
+  }
 
-  static getDetailedWeather = async (
+  async getDetailedWeather(
     cityId: string,
     currentDate: string,
     days: number = 5
-  ): Promise<DetailedWeather> => {
+  ): Promise<DetailedWeather> {
     try {
       const promises = [];
 
@@ -69,7 +75,12 @@ class WeatherApi {
 
         const url = `${baseUrl}/forecast.json?q=${cityId}&dt=${futureDate}`;
 
-        promises.push(HttpClient.get<DetailedWeatherDTO>(url, options));
+        promises.push(
+          HttpClient.get<DetailedWeatherDTO>(url, {
+            ...options,
+            ...this.headers,
+          })
+        );
       }
 
       const details = await Promise.all(promises);
@@ -92,9 +103,9 @@ class WeatherApi {
     } catch (error) {
       throw new Error("Failed to fetch detailed weather");
     }
-  };
+  }
 
-  static getFavorites = async (cityIds: string[]): Promise<BasicWeather[]> => {
+  async getFavorites(cityIds: string[]): Promise<BasicWeather[]> {
     try {
       const promises = cityIds.map((cityId) => this.getWeather(cityId));
 
@@ -104,7 +115,11 @@ class WeatherApi {
     } catch (error) {
       throw new Error("Failed to retrieve favorites");
     }
-  };
+  }
 }
 
-export default WeatherApi;
+const weatherApiService = new WeatherApi(
+  process.env.X_RapidAPI_Key || "",
+  process.env.X_RapidAPI_Host || ""
+);
+export default weatherApiService;

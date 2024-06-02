@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
-import WeatherApi from "@/service/WeatherApi";
+import weatherApi from "@/service/WeatherApi";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const cityIds = searchParams.get("ids") || "";
   try {
-    const results = await WeatherApi.getFavorites(cityIds.split(","));
+    const results = await weatherApi.getFavorites(cityIds.split(","));
     return NextResponse.json(results);
   } catch (error) {
     if (error instanceof Error) {

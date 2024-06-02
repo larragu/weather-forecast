@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import WeatherApi from "@/service/WeatherApi";
+import weatherApi from "@/service/WeatherApi";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -11,7 +11,7 @@ export async function GET(request: Request) {
   let result = {};
   if (id && currentDate) {
     try {
-      result = await WeatherApi.getDetailedWeather(
+      result = await weatherApi.getDetailedWeather(
         id,
         currentDate,
         Number(days)
