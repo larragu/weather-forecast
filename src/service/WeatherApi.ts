@@ -33,7 +33,7 @@ class WeatherApi {
 
         const results = await HttpClient.get<CityResultDTO[]>(url, {
           ...options,
-          ...this.headers,
+          headers: this.headers,
         });
 
         return results.map(({ id, name, region }) => ({
@@ -49,10 +49,11 @@ class WeatherApi {
 
   async getWeather(cityId: string): Promise<BasicWeather> {
     const url = `${baseUrl}/current.json?q=${cityId}`;
+
     try {
       const result = await HttpClient.get<BasicWeatherDTO>(url, {
         ...options,
-        ...this.headers,
+        headers: this.headers,
       });
 
       const basicWeather = formatBasicWeather(result);
@@ -78,7 +79,7 @@ class WeatherApi {
         promises.push(
           HttpClient.get<DetailedWeatherDTO>(url, {
             ...options,
-            ...this.headers,
+            headers: this.headers,
           })
         );
       }
