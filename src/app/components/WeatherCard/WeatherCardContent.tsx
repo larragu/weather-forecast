@@ -40,7 +40,7 @@ const WeatherCardContent = (
       {children}
       <Typography variant="body2" color="text.secondary">
         <Image
-          src={climateIcon}
+          src={`https:${climateIcon}`}
           alt={weatherDescription}
           width="50"
           height="50"
