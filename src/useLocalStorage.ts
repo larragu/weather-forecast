@@ -1,5 +1,7 @@
 "use client";
 
+import { useCallback } from "react";
+
 interface UseLocalStorageReturnProps {
   getLocalStorageData: <T>(key: string) => T | null;
   setLocalStorageData: <T>(key: string, data: T) => void;
@@ -8,7 +10,7 @@ interface UseLocalStorageReturnProps {
 const localStorage = typeof window !== "undefined" ? window.localStorage : null;
 
 const useLocalStorage = (): UseLocalStorageReturnProps => {
-  const getData = <T>(key: string): T | null => {
+  const getData = useCallback(<T>(key: string): T | null => {
     let data = null;
     if (localStorage) {
       const savedData = localStorage.getItem(key);
@@ -16,9 +18,9 @@ const useLocalStorage = (): UseLocalStorageReturnProps => {
     }
 
     return data;
-  };
+  }, []);
 
-  const setData = <T>(key: string, data: T): void => {
+  const setData = useCallback(<T>(key: string, data: T): void => {
     if (localStorage) {
       if (data) {
         localStorage.setItem(key, JSON.stringify(data));
@@ -26,7 +28,7 @@ const useLocalStorage = (): UseLocalStorageReturnProps => {
         localStorage.removeItem(key);
       }
     }
-  };
+  }, []);
 
   return {
     getLocalStorageData: getData,
