@@ -7,7 +7,7 @@ import {
 import {
   formatBasicWeather,
   formatDetailedWeather,
-} from "@/service/weatherApi.utils";
+} from "@/service/weather.utils";
 
 const LATENCY_MS = 300;
 

@@ -1,4 +1,4 @@
-import HttpClient from "./HttpClient";
+import HttpClient from "./http.client";
 import { CityResultDTO, DetailedWeather, BasicWeather } from "@/types";
 
 const getCities = async (

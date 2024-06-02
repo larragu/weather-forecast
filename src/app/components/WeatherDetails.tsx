@@ -6,7 +6,7 @@ import { DetailedWeatherCard } from "./WeatherCard";
 import { DetailedWeather } from "@/types";
 import { formatDate, getCurrentLocalDate } from "@/utils";
 import { useEffect, useState } from "react";
-import { getDetailedWeather } from "@/service/weatherClient";
+import { getDetailedWeather } from "@/service/weather.api";
 import { FORECAST_DAYS } from "@/constants";
 import Loader from "../loading";
 import { useToast } from "./Toast";

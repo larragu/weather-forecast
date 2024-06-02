@@ -1,5 +1,5 @@
 import { SyntheticEvent, useCallback, useEffect, useState } from "react";
-import { getCities, getWeather } from "../../../service/weatherClient";
+import { getCities, getWeather } from "../../../service/weather.api";
 import { useSearchBox } from "../SearchBox";
 import { BasicWeather, SearchBoxOption } from "@/types";
 import { useToast } from "@/app/components/Toast";

@@ -1,12 +1,9 @@
 import { NextResponse } from "next/server";
-import weatherApi from "@/service/WeatherApi";
+import { getWeather } from "@/service/weather.controller";
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const cityId = searchParams.get("id") || "";
-
   try {
-    const results = await weatherApi.getWeather(cityId);
+    const results = await getWeather(request);
 
     return NextResponse.json(results);
   } catch (error) {

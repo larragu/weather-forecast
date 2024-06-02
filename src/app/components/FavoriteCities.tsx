@@ -1,7 +1,7 @@
 "use client";
 
 import LinkCard from "@/app/components/LinkCard";
-import { getFavorites } from "@/service/weatherClient";
+import { getFavorites } from "@/service/weather.api";
 import { useEffect, useState } from "react";
 import { BasicWeather } from "@/types";
 import { Typography, Box, Grid, Container } from "@mui/material";
