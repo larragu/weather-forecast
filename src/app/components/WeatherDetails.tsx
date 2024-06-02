@@ -47,7 +47,7 @@ const WeatherDetails = ({
     if (error) {
       toast({ message: error, status: "error" });
     }
-  }, [error]);
+  }, [error, toast]);
 
   if (error) {
     return null;

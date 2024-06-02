@@ -38,7 +38,7 @@ const FavoriteCities = (): JSX.Element | null => {
     } else {
       setIsLoading(false);
     }
-  }, [favorites]);
+  }, [favorites, toast]);
 
   if (isLoading) {
     return <Loading />;
